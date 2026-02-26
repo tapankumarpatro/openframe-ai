@@ -51,8 +51,6 @@ After agents run, you get a **visual canvas** where you can:
 
 ### Sample Video
 
-[![Alt text for screen readers]([URL_TO_YOUR_THUMBNAIL_IMAGE.jpg](https://minio-obj-storage-api.panaiq.com/openframe/ugc_example.jpeg))]([URL_TO_YOUR_ACTUAL_VIDEO](https://minio-obj-storage-api.panaiq.com/openframe/openframe_ai_example.mp4))
-
 <p align="center">
   <a href="https://minio-obj-storage-api.panaiq.com/openframe/openframe_ai_example.mp4">
     <img src="https://minio-obj-storage-api.panaiq.com/openframe/openframe_ai_example.mp4" width="720" alt="OpenFrame AI — Sample Video" />
