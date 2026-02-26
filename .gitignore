@@ -1,0 +1,51 @@
+# ── Environment & Secrets ─────────────────────────────────
+.env
+settings.json
+
+# ── Python ────────────────────────────────────────────────
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Node / Next.js ────────────────────────────────────────
+node_modules/
+.next/
+ui/.next/
+ui/node_modules/
+ui/.env.local
+
+# ── Generated data (user-specific) ───────────────────────
+data/
+output/
+uploads/
+video_files/
+.workflow_backup/
+
+# ── IDE / OS ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+.cursorrules
+
+# ── Logs & temp ───────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# ── Misc dev artifacts ────────────────────────────────────
+plans/
+panaiq_workflow_graph.png
+video\ model\ detaisl.txt
+test_models.py
+test_e2e.py
+PRODUCT_REQUIREMENTS.md

@@ -1,0 +1,253 @@
+{
+  "workflow_id": "ugc-perfume-if-you-know",
+  "user_input": "Niche perfume brand, mysterious unisex fragrance with oud and vanilla notes",
+  "status": "completed",
+  "created_at": "2026-02-15T10:30:00.000000+00:00",
+  "result": {
+    "user_input": "Niche perfume brand, mysterious unisex fragrance with oud and vanilla notes",
+    "creative_brief": {
+      "campaign_title": "If You Know, You Know",
+      "concept_summary": "A raw, first-person UGC-style confessional where the wearer shares their obsession with a niche fragrance. No fancy sets, no scripts — just authentic moments of someone who found their signature scent and can't stop talking about it.",
+      "mood_keywords": [
+        "Authentic",
+        "Obsessive",
+        "Intimate",
+        "Mysterious",
+        "Casual"
+      ],
+      "tagline": "Your secret. Your signature."
+    },
+    "visual_identity": {
+      "color_palette": [
+        "Warm Amber",
+        "Deep Plum",
+        "Soft Cream",
+        "Smoky Black"
+      ],
+      "textures_materials": "Matte glass bottle, raw cotton fabrics, soft skin close-ups, natural bedroom textures",
+      "composition_style": "Handheld selfie framing, casual off-center composition, shallow depth of field with bokeh backgrounds"
+    },
+    "product_specs": {
+      "material_behavior": "Matte dark glass perfume bottle with smooth tactile surface, subtle weight in hand, golden liquid visible through semi-transparent body, brushed gold cap with soft click mechanism.",
+      "surface_detail": "Deep amber-black matte glass with micro-texture finish catching soft window light, embossed brand logo in matte gold, thin neck with precise machined threads, golden liquid with slight viscosity visible through glass body.",
+      "styling_integration": "Held casually in one hand at chest height, occasionally brought to wrist or neck for application, placed on bedside table or bathroom counter between takes.",
+      "visual_product_description": "Niche perfume bottle in matte dark amber-black glass with embossed gold logo, brushed gold cap, golden oud-vanilla liquid visible through semi-transparent body, held casually or placed on natural surfaces, intimate bedroom lighting."
+    },
+    "casting_brief": {
+      "cast_members": [
+        {
+          "name": "Sarah",
+          "driver_type": "human",
+          "visual_prompt": "Photorealistic selfie-angle portrait of a 26-year-old woman, natural beauty with minimal makeup, warm brown skin, thick curly dark hair loosely pulled back, expressive dark brown eyes, wearing an oversized cream knit sweater off one shoulder, genuine excited smile, visible phone in one hand, casual confident energy, natural bedroom window light on face, high-resolution skin detail and hair texture, iPhone selfie aesthetic with slight wide-angle distortion."
+        }
+      ],
+      "setting_a_description": "Cozy lived-in bedroom with unmade white linen bed, warm morning light streaming through sheer curtains, wooden bedside table with scattered jewelry and books, plants on windowsill, warm amber-toned walls, authentic messy-chic aesthetic.",
+      "setting_b_description": "Modern minimalist bathroom with white marble countertop, round mirror with soft warm Edison bulb lighting, skincare products casually arranged, steam-fogged mirror edges, intimate morning-routine atmosphere."
+    },
+    "camera_specs": {
+      "lighting": "Natural window light, warm morning golden hour filtering through sheer curtains, no artificial lighting, authentic phone-camera aesthetic",
+      "camera_gear": "iPhone 15 Pro front camera selfie, 12mm ultrawide, f/1.9 aperture, handheld with natural shake",
+      "color_temperature": "Warm golden with amber undertones, ~5500K",
+      "contrast_tone": "Medium contrast, slightly lifted blacks for social media look, warm color grading, subtle grain",
+      "technical_prompt_block": "natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld with natural shake, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look"
+    },
+    "shot_list": {
+      "scenes": [
+        {
+          "scene_number": 1,
+          "type": "Intro",
+          "shot_type": "Close Up",
+          "visual_type": "Model Shot",
+          "audio_mode": "talking-head",
+          "visual_description": "Girl holds phone steady in selfie position, leans in slightly toward camera with animated facial expressions, raises eyebrows and smiles genuinely while speaking, natural hand gestures nearby.",
+          "action_movement": "Slight lean forward toward camera, animated eyebrow raise, genuine smile breaking through",
+          "start_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty minimal makeup warm brown skin thick curly dark hair loosely pulled back expressive dark brown eyes wearing oversized cream knit sweater off one shoulder, holding phone at arm's length selfie angle, cozy bedroom background with unmade white linen bed warm morning light through sheer curtains, genuine excited expression about to speak, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "end_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty minimal makeup warm brown skin thick curly dark hair loosely pulled back expressive dark brown eyes wearing oversized cream knit sweater off one shoulder, holding phone selfie angle leaned slightly closer to camera, cozy bedroom background blurred bokeh unmade bed warm light, animated genuine smile mid-laugh expressive eyes sparkling, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "dialogue": "Okay, I need to tell you about this perfume because I literally get stopped everywhere I go.",
+          "dialogue_speaker": "Sarah",
+          "active_cast": [
+            "Sarah"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 2,
+          "type": "Reveal",
+          "shot_type": "Medium Shot",
+          "visual_type": "Product Shot",
+          "audio_mode": "talking-head",
+          "visual_description": "Sarah holds up the perfume bottle to camera, tilts it to catch the light, then sprays it on her wrist with eyes closed in pleasure.",
+          "action_movement": "Lifts bottle to camera, tilts to show golden liquid, sprays on wrist, closes eyes and inhales",
+          "start_image_prompt": "Photorealistic iPhone selfie medium shot of 26-year-old woman natural beauty cream sweater holding up matte dark amber-black glass perfume bottle with embossed gold logo brushed gold cap golden liquid visible, presenting bottle to camera with excited expression, cozy bedroom warm morning light sheer curtains bokeh background, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "end_image_prompt": "Photorealistic iPhone selfie medium shot of 26-year-old woman natural beauty cream sweater eyes closed in pleasure holding wrist near nose after spraying perfume, matte dark perfume bottle in other hand, genuine blissful expression inhaling fragrance, cozy bedroom warm morning light sheer curtains bokeh background, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "dialogue": "This is it. This is the one that literally makes me feel like THAT girl every single time.",
+          "dialogue_speaker": "Sarah",
+          "active_cast": [
+            "Sarah"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 3,
+          "type": "Closing",
+          "shot_type": "Close Up",
+          "visual_type": "Model Shot",
+          "audio_mode": "talking-head",
+          "visual_description": "Sarah leans into camera at shoulder level, looks directly into camera with confident smile, slight head tilt, natural blink, subtle nod as she finishes speaking, relaxed and authentic.",
+          "action_movement": "Leans to shoulder level, direct eye contact, confident smile, slight head tilt, subtle nod",
+          "start_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty warm brown skin curly dark hair cream sweater, at shoulder level looking directly into camera with confident knowing smile slight head tilt, perfume bottle visible on bedside table behind her, cozy bedroom warm morning light, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "end_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty warm brown skin curly dark hair cream sweater, leaned close to camera conspiratorial whisper expression knowing smile relaxed authentic subtle nod, perfume bottle on bedside table behind her, cozy bedroom warm golden morning light, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+          "dialogue": "Trust me, if you want compliments and to feel amazing, this is the one you need.",
+          "dialogue_speaker": "Sarah",
+          "active_cast": [
+            "Sarah"
+          ],
+          "active_setting": "setting_a"
+        }
+      ]
+    },
+    "audio_specs": {
+      "voiceover_script": "I can't stop talking about this perfume — it's my secret to feeling like 'that' girl.",
+      "music_prompt_technical": "Chord Progression: Cmaj7 – Am7 – Fmaj7 – G. Instrumentation: Lo-fi beat, soft vinyl crackle, muted Rhodes piano, light finger snaps. Atmosphere: Cozy bedroom vibe, warm intimate feel. Tempo: Chill, 85 BPM.",
+      "audio_atmosphere_description": "Casual, intimate lo-fi bedroom atmosphere with warm authentic energy."
+    },
+    "_manual_items": [
+      {
+        "id": "product-main",
+        "type": "product",
+        "label": "Product",
+        "text_prompt": "Niche perfume bottle in matte dark amber-black glass with embossed gold logo, brushed gold cap, golden oud-vanilla liquid visible through semi-transparent body, held casually or placed on natural surfaces, intimate bedroom lighting."
+      },
+      {
+        "id": "cast-sarah",
+        "type": "character",
+        "label": "Sarah",
+        "driver_type": "human",
+        "text_prompt": "Photorealistic selfie-angle portrait of a 26-year-old woman, natural beauty with minimal makeup, warm brown skin, thick curly dark hair loosely pulled back, expressive dark brown eyes, wearing an oversized cream knit sweater off one shoulder, genuine excited smile, visible phone in one hand, casual confident energy, natural bedroom window light on face, high-resolution skin detail and hair texture, iPhone selfie aesthetic with slight wide-angle distortion.",
+        "image_url": "https://tempfile.aiquickdraw.com/images/1772017000583-znwnuyye0w.png",
+        "image_history": [
+          "https://tempfile.aiquickdraw.com/images/1772017000583-znwnuyye0w.png"
+        ]
+      },
+      {
+        "id": "env-a",
+        "type": "environment",
+        "label": "Setting A",
+        "text_prompt": "Cozy lived-in bedroom with unmade white linen bed, warm morning light streaming through sheer curtains, wooden bedside table with scattered jewelry and books, plants on windowsill, warm amber-toned walls, authentic messy-chic aesthetic.",
+        "image_url": "https://tempfile.aiquickdraw.com/workers/nano/image_1771853324631_21izqr.png",
+        "image_history": [
+          "https://tempfile.aiquickdraw.com/workers/nano/image_1771853324631_21izqr.png"
+        ]
+      },
+      {
+        "id": "env-b",
+        "type": "environment",
+        "label": "Setting B",
+        "text_prompt": "Modern minimalist bathroom with white marble countertop, round mirror with soft warm Edison bulb lighting, skincare products casually arranged, steam-fogged mirror edges, intimate morning-routine atmosphere."
+      },
+      {
+        "id": "camera-main",
+        "type": "camera",
+        "label": "Camera & Lighting",
+        "text_prompt": "natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld with natural shake, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look"
+      },
+      {
+        "id": "vo-main",
+        "type": "voiceover",
+        "label": "Voiceover",
+        "text_prompt": "I can't stop talking about this perfume — it's my secret to feeling like 'that' girl."
+      },
+      {
+        "id": "music-main",
+        "type": "music",
+        "label": "Music Prompt",
+        "text_prompt": "Chord Progression: Cmaj7 – Am7 – Fmaj7 – G. Instrumentation: Lo-fi beat, soft vinyl crackle, muted Rhodes piano, light finger snaps. Atmosphere: Cozy bedroom vibe, warm intimate feel. Tempo: Chill, 85 BPM."
+      }
+    ],
+    "_manual_scenes": [
+      {
+        "id": "scene-1",
+        "scene_number": 1,
+        "type": "Intro",
+        "shot_type": "Close Up",
+        "visual_type": "Model Shot",
+        "visual_description": "Girl holds phone steady in selfie position, leans in slightly toward camera with animated facial expressions, raises eyebrows and smiles genuinely while speaking, natural hand gestures nearby.",
+        "action_movement": "Slight lean forward toward camera, animated eyebrow raise, genuine smile breaking through",
+        "start_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty minimal makeup warm brown skin thick curly dark hair loosely pulled back expressive dark brown eyes wearing oversized cream knit sweater off one shoulder, holding phone at arm's length selfie angle, cozy bedroom background with unmade white linen bed warm morning light through sheer curtains, genuine excited expression about to speak, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "end_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty minimal makeup warm brown skin thick curly dark hair loosely pulled back expressive dark brown eyes wearing oversized cream knit sweater off one shoulder, holding phone selfie angle leaned slightly closer to camera, cozy bedroom background blurred bokeh unmade bed warm light, animated genuine smile mid-laugh expressive eyes sparkling, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "done",
+        "end_frame_status": "idle",
+        "video_status": "done",
+        "active_cast": [
+          "Sarah"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "talking-head",
+        "dialogue": "Okay, I need to tell you about this perfume because I literally get stopped everywhere I go.",
+        "dialogue_speaker": "Sarah",
+        "start_frame_image": "https://tempfile.aiquickdraw.com/workers/nano/image_1771852570280_9os8cb.png",
+        "start_frame_history": [
+          "https://tempfile.aiquickdraw.com/workers/nano/image_1771852570280_9os8cb.png"
+        ],
+        "video_url": "https://tempfile.aiquickdraw.com/h/751709ef78c1b0768ad2925d11dac5e1_1771868077.mp4"
+      },
+      {
+        "id": "scene-2",
+        "scene_number": 2,
+        "type": "Reveal",
+        "shot_type": "Medium Shot",
+        "visual_type": "Product Shot",
+        "visual_description": "Sarah holds up the perfume bottle to camera, tilts it to catch the light, then sprays it on her wrist with eyes closed in pleasure.",
+        "action_movement": "Lifts bottle to camera, tilts to show golden liquid, sprays on wrist, closes eyes and inhales",
+        "start_image_prompt": "Photorealistic iPhone selfie medium shot of 26-year-old woman natural beauty cream sweater holding up matte dark amber-black glass perfume bottle with embossed gold logo brushed gold cap golden liquid visible, presenting bottle to camera with excited expression, cozy bedroom warm morning light sheer curtains bokeh background, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "end_image_prompt": "Photorealistic iPhone selfie medium shot of 26-year-old woman natural beauty cream sweater eyes closed in pleasure holding wrist near nose after spraying perfume, matte dark perfume bottle in other hand, genuine blissful expression inhaling fragrance, cozy bedroom warm morning light sheer curtains bokeh background, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "done",
+        "end_frame_status": "idle",
+        "video_status": "done",
+        "active_cast": [
+          "Sarah"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "talking-head",
+        "dialogue": "This is it. This is the one that literally makes me feel like THAT girl every single time.",
+        "dialogue_speaker": "Sarah",
+        "start_frame_image": "https://tempfile.aiquickdraw.com/workers/nano/image_1771853352831_6j0gk0.png",
+        "start_frame_history": [
+          "https://tempfile.aiquickdraw.com/workers/nano/image_1771853352831_6j0gk0.png"
+        ],
+        "video_url": "https://tempfile.aiquickdraw.com/h/ae261ac21145c1291c31e9f5eef26b57_1771894081.mp4"
+      },
+      {
+        "id": "scene-3",
+        "scene_number": 3,
+        "type": "Closing",
+        "shot_type": "Close Up",
+        "visual_type": "Model Shot",
+        "visual_description": "Sarah leans into camera at shoulder level, looks directly into camera with confident smile, slight head tilt, natural blink, subtle nod as she finishes speaking, relaxed and authentic.",
+        "action_movement": "Leans to shoulder level, direct eye contact, confident smile, slight head tilt, subtle nod",
+        "start_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty warm brown skin curly dark hair cream sweater, at shoulder level looking directly into camera with confident knowing smile slight head tilt, perfume bottle visible on bedside table behind her, cozy bedroom warm morning light, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "end_image_prompt": "Photorealistic iPhone selfie close-up of 26-year-old woman natural beauty warm brown skin curly dark hair cream sweater, leaned close to camera conspiratorial whisper expression knowing smile relaxed authentic subtle nod, perfume bottle on bedside table behind her, cozy bedroom warm golden morning light, natural window morning light through sheer curtains, iPhone selfie camera aesthetic handheld, warm golden 5500K, medium contrast lifted blacks warm grading subtle grain, authentic UGC social media look",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Sarah"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "talking-head",
+        "dialogue": "Trust me, if you want compliments and to feel amazing, this is the one you need.",
+        "dialogue_speaker": "Sarah"
+      }
+    ],
+    "_standalone_items": []
+  }
+}

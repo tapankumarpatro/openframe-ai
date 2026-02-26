@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+*.pyc
+.env
+output/
+data/
+uploads/
+video_files/
+.git/
+.github/
+openframe_workflow_graph.png
+ui/
+node_modules/
+.next/
+test_models.py

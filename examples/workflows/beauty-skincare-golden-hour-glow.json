@@ -1,0 +1,307 @@
+{
+  "workflow_id": "beauty-skincare-golden-hour-glow",
+  "user_input": "Premium vitamin C serum with gold flakes, luxury skincare brand",
+  "status": "completed",
+  "created_at": "2026-02-14T08:15:00.000000+00:00",
+  "result": {
+    "user_input": "Premium vitamin C serum with gold flakes, luxury skincare brand",
+    "creative_brief": {
+      "campaign_title": "Golden Hour Glow",
+      "concept_summary": "An intimate beauty ritual captured in the amber light of golden hour. The vitamin C serum with suspended gold flakes becomes a luminous elixir — each drop a moment of self-care that transforms skin from within. The campaign celebrates the quiet luxury of glowing naturally.",
+      "mood_keywords": [
+        "Luminous",
+        "Intimate",
+        "Luxurious",
+        "Radiant",
+        "Serene"
+      ],
+      "tagline": "Liquid gold. Real glow."
+    },
+    "visual_identity": {
+      "color_palette": [
+        "Warm Gold",
+        "Soft Peach",
+        "Ivory White",
+        "Honey Amber"
+      ],
+      "textures_materials": "Glass dropper bottle with gold suspension, dewy skin, soft cotton towels, marble surfaces, water droplets",
+      "composition_style": "Tight intimate framing, luminous skin-focused macro shots, golden backlight creating halo effects, symmetrical beauty compositions"
+    },
+    "product_specs": {
+      "material_behavior": "Clear glass dropper bottle with visible gold flake suspension floating in amber-tinted serum, precision glass dropper with gold-plated collar, serum has slight viscosity with slow golden shimmer movement when tilted.",
+      "surface_detail": "Crystal-clear glass bottle with flawless surface catching light refractions, suspended micro gold flakes creating internal luminosity, amber serum with honey-like consistency, gold-plated dropper collar with mirror finish, white minimal branding in sans-serif font.",
+      "styling_integration": "Held between fingertips at face level, dropper releasing single golden drop onto fingertip or directly onto cheek, placed upright on white marble bathroom counter between applications.",
+      "visual_product_description": "Premium vitamin C serum in crystal-clear glass dropper bottle with visible suspended gold flakes in amber serum, gold-plated dropper collar with mirror finish, minimal white branding, held delicately or placed on marble surface, golden light refracting through liquid creating internal glow."
+    },
+    "casting_brief": {
+      "cast_members": [
+        {
+          "name": "Glow Model",
+          "driver_type": "human",
+          "visual_prompt": "Photorealistic beauty portrait of a 28-year-old East Asian woman with flawless luminous skin, natural dewy complexion with visible healthy glow, minimal makeup with glass-skin effect, straight black hair pulled back in sleek low bun, defined cheekbones catching light, serene calm expression with soft closed-lip smile, bare shoulders wrapped in off-white silk robe, high-resolution macro skin detail showing pores and natural texture with dewy highlights, beauty lighting with golden rim light."
+        }
+      ],
+      "setting_a_description": "Minimalist luxury bathroom with white Calacatta marble countertop and backsplash, round backlit mirror with warm diffused glow, single orchid in slim vase, soft white towels folded neatly, golden hour light streaming through frosted glass window, serene spa-like atmosphere.",
+      "setting_b_description": "Pure white beauty studio backdrop with controlled golden backlight creating luminous halo effect, clean infinite white sweep with subtle warm gradient, professional beauty shoot environment with intimate feeling."
+    },
+    "camera_specs": {
+      "lighting": "Golden hour backlight through frosted window creating luminous rim light on skin, large circular beauty dish as key light for even skin illumination, subtle gold reflector fill from below",
+      "camera_gear": "Shot on Sony A7R V, Canon RF 100mm f/2.8L Macro IS USM lens, f/4 aperture for beauty sharpness",
+      "color_temperature": "Warm golden, ~4500K with peach undertones",
+      "contrast_tone": "Low contrast, luminous highlight bloom, lifted shadows to show skin detail, soft golden color grade",
+      "technical_prompt_block": "golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade"
+    },
+    "shot_list": {
+      "scenes": [
+        {
+          "scene_number": 1,
+          "type": "Intro",
+          "shot_type": "Close Up",
+          "visual_type": "Product Shot",
+          "audio_mode": "silent",
+          "visual_description": "The serum bottle sits on marble counter, golden hour light refracting through the gold-flake serum creating dancing light patterns.",
+          "action_movement": "Camera slowly pushes in toward bottle as gold flakes drift lazily inside the amber serum.",
+          "start_image_prompt": "Photorealistic close-up of premium vitamin C serum crystal-clear glass dropper bottle with visible suspended gold flakes in amber serum gold-plated dropper collar mirror finish minimal white branding, placed upright on white Calacatta marble countertop luxury bathroom, golden hour light streaming through frosted glass window refracting through bottle creating warm light patterns, orchid and soft towels background, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "end_image_prompt": "Photorealistic tight close-up of premium vitamin C serum crystal-clear glass dropper bottle with visible suspended gold flakes drifting in amber serum gold-plated dropper collar mirror finish, on white Calacatta marble countertop luxury bathroom, golden hour light refracting through bottle gold flakes catching light creating internal luminosity, warm dancing light patterns on marble surface, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "active_cast": [],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 2,
+          "type": "Action",
+          "shot_type": "Extreme Close Up",
+          "visual_type": "Standard",
+          "audio_mode": "silent",
+          "visual_description": "Delicate fingers lift the dropper from the bottle, a single golden drop forms and catches the light as it hangs from the glass tip.",
+          "action_movement": "Fingers slowly pull dropper from bottle, golden serum drop forms on dropper tip and elongates.",
+          "start_image_prompt": "Photorealistic extreme close-up of delicate feminine fingers with natural nails lifting glass dropper from premium vitamin C serum bottle, gold-plated collar visible, amber serum with gold flakes clinging to glass dropper, bottle on marble surface, golden hour light catching the glass and liquid, macro detail on serum texture, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "end_image_prompt": "Photorealistic extreme close-up of glass dropper held by delicate feminine fingers, single perfect golden serum drop hanging from dropper tip catching golden light, visible gold micro-flakes suspended in the drop, serum bottle blurred below, luminous backlight creating glow through the amber drop, macro detail on liquid surface tension, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "active_cast": [
+            "Glow Model"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 3,
+          "type": "Reveal",
+          "shot_type": "Close Up",
+          "visual_type": "Model Shot",
+          "audio_mode": "silent",
+          "visual_description": "The golden drop lands on her cheek, she gently presses it into skin with fingertips, skin begins to catch light with dewy luminosity.",
+          "action_movement": "Drop lands on cheekbone, fingertips gently press and spread serum across cheek in upward motion.",
+          "start_image_prompt": "Photorealistic beauty close-up of 28-year-old East Asian woman flawless luminous skin natural dewy complexion straight black hair sleek low bun defined cheekbones bare shoulders off-white silk robe, single golden serum drop just placed on high cheekbone catching light, fingertips approaching cheek, serene calm expression eyes looking down, white luxury bathroom background marble warm light, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "end_image_prompt": "Photorealistic beauty close-up of 28-year-old East Asian woman flawless luminous skin natural dewy complexion straight black hair sleek low bun defined cheekbones bare shoulders off-white silk robe, fingertips gently pressing golden serum into cheek skin showing dewy luminous glow glass-skin effect where serum applied, golden shimmer visible on cheekbone, serene blissful expression soft closed-lip smile, white luxury bathroom background warm light, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "active_cast": [
+            "Glow Model"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 4,
+          "type": "Detail",
+          "shot_type": "Extreme Close Up",
+          "visual_type": "Standard",
+          "audio_mode": "silent",
+          "visual_description": "Macro shot of skin surface showing the serum absorbing, gold micro-flakes settling into skin texture, luminous dewy finish forming.",
+          "action_movement": "Slow macro zoom showing serum absorbing into skin pores, golden shimmer settling, dewy highlight forming.",
+          "start_image_prompt": "Photorealistic extreme macro close-up of cheek skin surface with golden vitamin C serum freshly applied, visible gold micro-flakes on skin surface, serum still wet with slight viscosity, natural skin texture pores visible, luminous golden backlight creating glow on wet surface, skin-focused beauty macro, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "end_image_prompt": "Photorealistic extreme macro close-up of cheek skin surface with golden vitamin C serum absorbed, dewy glass-skin finish with luminous highlight, gold micro-flakes settled into skin creating subtle shimmer, healthy radiant pore-refined texture, natural skin glow effect, golden backlight creating halo on dewy surface, skin-focused beauty macro, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "active_cast": [
+            "Glow Model"
+          ],
+          "active_setting": "setting_b"
+        },
+        {
+          "scene_number": 5,
+          "type": "Closing",
+          "shot_type": "Medium Shot",
+          "visual_type": "Model Shot",
+          "audio_mode": "silent",
+          "visual_description": "Full beauty shot of model with complete golden-hour glow, skin radiant and luminous, bottle held gracefully beside her face, serene confident expression.",
+          "action_movement": "Model slowly turns face toward camera light, skin catching golden glow, lifts bottle beside face with gentle smile.",
+          "start_image_prompt": "Photorealistic beauty medium shot of 28-year-old East Asian woman flawless luminous dewy skin glass-skin effect natural glow straight black hair sleek low bun defined cheekbones catching golden light bare shoulders off-white silk robe, facing slightly away from camera, holding vitamin C serum bottle with gold flakes at shoulder level, pure white beauty studio backdrop with warm golden backlight creating luminous halo, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "end_image_prompt": "Photorealistic beauty medium shot of 28-year-old East Asian woman flawless luminous dewy skin glass-skin effect radiant golden glow straight black hair sleek low bun defined cheekbones catching golden light bare shoulders off-white silk robe, turned toward camera with serene confident soft smile, holding vitamin C serum bottle with gold flakes gracefully beside face, pure white beauty studio backdrop with warm golden backlight creating luminous halo around her, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+          "active_cast": [
+            "Glow Model"
+          ],
+          "active_setting": "setting_b"
+        }
+      ]
+    },
+    "audio_specs": {
+      "voiceover_script": "Liquid gold meets skin. Every drop, a ritual. Every glow, earned from within.",
+      "music_prompt_technical": "Chord Progression: Dmaj7 – Gmaj7 – Em7 – A7. Instrumentation: Soft harp arpeggios, warm pad synth, delicate glass chimes, subtle breath-like ambient textures. Atmosphere: Ethereal spa-like serenity, luminous warmth. Tempo: Gentle, flowing, 70 BPM.",
+      "audio_atmosphere_description": "Luminous, serene ambient soundscape evoking luxury spa ritual and golden warmth."
+    },
+    "_manual_items": [
+      {
+        "id": "product-main",
+        "type": "product",
+        "label": "Product",
+        "text_prompt": "Premium vitamin C serum in crystal-clear glass dropper bottle with visible suspended gold flakes in amber serum, gold-plated dropper collar with mirror finish, minimal white branding, held delicately or placed on marble surface, golden light refracting through liquid creating internal glow."
+      },
+      {
+        "id": "cast-glow-model",
+        "type": "character",
+        "label": "Glow Model",
+        "driver_type": "human",
+        "text_prompt": "Photorealistic beauty portrait of a 28-year-old East Asian woman with flawless luminous skin, natural dewy complexion with visible healthy glow, minimal makeup with glass-skin effect, straight black hair pulled back in sleek low bun, defined cheekbones catching light, serene calm expression with soft closed-lip smile, bare shoulders wrapped in off-white silk robe, high-resolution macro skin detail showing pores and natural texture with dewy highlights, beauty lighting with golden rim light.",
+        "image_url": "https://tempfile.aiquickdraw.com/workers/nano/image_1771842323059_8jv33i.png",
+        "image_history": [
+          "https://tempfile.aiquickdraw.com/workers/nano/image_1771842323059_8jv33i.png"
+        ]
+      },
+      {
+        "id": "env-a",
+        "type": "environment",
+        "label": "Setting A",
+        "text_prompt": "Minimalist luxury bathroom with white Calacatta marble countertop and backsplash, round backlit mirror with warm diffused glow, single orchid in slim vase, soft white towels folded neatly, golden hour light streaming through frosted glass window, serene spa-like atmosphere."
+      },
+      {
+        "id": "env-b",
+        "type": "environment",
+        "label": "Setting B",
+        "text_prompt": "Pure white beauty studio backdrop with controlled golden backlight creating luminous halo effect, clean infinite white sweep with subtle warm gradient, professional beauty shoot environment with intimate feeling."
+      },
+      {
+        "id": "camera-main",
+        "type": "camera",
+        "label": "Camera & Lighting",
+        "text_prompt": "golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade"
+      },
+      {
+        "id": "vo-main",
+        "type": "voiceover",
+        "label": "Voiceover",
+        "text_prompt": "Liquid gold meets skin. Every drop, a ritual. Every glow, earned from within."
+      },
+      {
+        "id": "music-main",
+        "type": "music",
+        "label": "Music Prompt",
+        "text_prompt": "Chord Progression: Dmaj7 – Gmaj7 – Em7 – A7. Instrumentation: Soft harp arpeggios, warm pad synth, delicate glass chimes, subtle breath-like ambient textures. Atmosphere: Ethereal spa-like serenity, luminous warmth. Tempo: Gentle, flowing, 70 BPM."
+      }
+    ],
+    "_manual_scenes": [
+      {
+        "id": "scene-1",
+        "scene_number": 1,
+        "type": "Intro",
+        "shot_type": "Close Up",
+        "visual_type": "Product Shot",
+        "visual_description": "The serum bottle sits on marble counter, golden hour light refracting through the gold-flake serum creating dancing light patterns.",
+        "action_movement": "Camera slowly pushes in toward bottle as gold flakes drift lazily inside the amber serum.",
+        "start_image_prompt": "Photorealistic close-up of premium vitamin C serum crystal-clear glass dropper bottle with visible suspended gold flakes in amber serum gold-plated dropper collar mirror finish minimal white branding, placed upright on white Calacatta marble countertop luxury bathroom, golden hour light streaming through frosted glass window refracting through bottle creating warm light patterns, orchid and soft towels background, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "end_image_prompt": "Photorealistic tight close-up of premium vitamin C serum crystal-clear glass dropper bottle with visible suspended gold flakes drifting in amber serum gold-plated dropper collar mirror finish, on white Calacatta marble countertop luxury bathroom, golden hour light refracting through bottle gold flakes catching light creating internal luminosity, warm dancing light patterns on marble surface, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-2",
+        "scene_number": 2,
+        "type": "Action",
+        "shot_type": "Extreme Close Up",
+        "visual_type": "Standard",
+        "visual_description": "Delicate fingers lift the dropper from the bottle, a single golden drop forms and catches the light as it hangs from the glass tip.",
+        "action_movement": "Fingers slowly pull dropper from bottle, golden serum drop forms on dropper tip and elongates.",
+        "start_image_prompt": "Photorealistic extreme close-up of delicate feminine fingers with natural nails lifting glass dropper from premium vitamin C serum bottle, gold-plated collar visible, amber serum with gold flakes clinging to glass dropper, bottle on marble surface, golden hour light catching the glass and liquid, macro detail on serum texture, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "end_image_prompt": "Photorealistic extreme close-up of glass dropper held by delicate feminine fingers, single perfect golden serum drop hanging from dropper tip catching golden light, visible gold micro-flakes suspended in the drop, serum bottle blurred below, luminous backlight creating glow through the amber drop, macro detail on liquid surface tension, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Glow Model"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-3",
+        "scene_number": 3,
+        "type": "Reveal",
+        "shot_type": "Close Up",
+        "visual_type": "Model Shot",
+        "visual_description": "The golden drop lands on her cheek, she gently presses it into skin with fingertips, skin begins to catch light with dewy luminosity.",
+        "action_movement": "Drop lands on cheekbone, fingertips gently press and spread serum across cheek in upward motion.",
+        "start_image_prompt": "Photorealistic beauty close-up of 28-year-old East Asian woman flawless luminous skin natural dewy complexion straight black hair sleek low bun defined cheekbones bare shoulders off-white silk robe, single golden serum drop just placed on high cheekbone catching light, fingertips approaching cheek, serene calm expression eyes looking down, white luxury bathroom background marble warm light, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "end_image_prompt": "Photorealistic beauty close-up of 28-year-old East Asian woman flawless luminous skin natural dewy complexion straight black hair sleek low bun defined cheekbones bare shoulders off-white silk robe, fingertips gently pressing golden serum into cheek skin showing dewy luminous glow glass-skin effect where serum applied, golden shimmer visible on cheekbone, serene blissful expression soft closed-lip smile, white luxury bathroom background warm light, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Glow Model"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-4",
+        "scene_number": 4,
+        "type": "Detail",
+        "shot_type": "Extreme Close Up",
+        "visual_type": "Standard",
+        "visual_description": "Macro shot of skin surface showing the serum absorbing, gold micro-flakes settling into skin texture, luminous dewy finish forming.",
+        "action_movement": "Slow macro zoom showing serum absorbing into skin pores, golden shimmer settling, dewy highlight forming.",
+        "start_image_prompt": "Photorealistic extreme macro close-up of cheek skin surface with golden vitamin C serum freshly applied, visible gold micro-flakes on skin surface, serum still wet with slight viscosity, natural skin texture pores visible, luminous golden backlight creating glow on wet surface, skin-focused beauty macro, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "end_image_prompt": "Photorealistic extreme macro close-up of cheek skin surface with golden vitamin C serum absorbed, dewy glass-skin finish with luminous highlight, gold micro-flakes settled into skin creating subtle shimmer, healthy radiant pore-refined texture, natural skin glow effect, golden backlight creating halo on dewy surface, skin-focused beauty macro, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Glow Model"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-5",
+        "scene_number": 5,
+        "type": "Closing",
+        "shot_type": "Medium Shot",
+        "visual_type": "Model Shot",
+        "visual_description": "Full beauty shot of model with complete golden-hour glow, skin radiant and luminous, bottle held gracefully beside her face, serene confident expression.",
+        "action_movement": "Model slowly turns face toward camera light, skin catching golden glow, lifts bottle beside face with gentle smile.",
+        "start_image_prompt": "Photorealistic beauty medium shot of 28-year-old East Asian woman flawless luminous dewy skin glass-skin effect natural glow straight black hair sleek low bun defined cheekbones catching golden light bare shoulders off-white silk robe, facing slightly away from camera, holding vitamin C serum bottle with gold flakes at shoulder level, pure white beauty studio backdrop with warm golden backlight creating luminous halo, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "end_image_prompt": "Photorealistic beauty medium shot of 28-year-old East Asian woman flawless luminous dewy skin glass-skin effect radiant golden glow straight black hair sleek low bun defined cheekbones catching golden light bare shoulders off-white silk robe, turned toward camera with serene confident soft smile, holding vitamin C serum bottle with gold flakes gracefully beside face, pure white beauty studio backdrop with warm golden backlight creating luminous halo around her, golden hour backlight through frosted window with beauty dish key light and gold reflector fill, shot on Sony A7R V Canon 100mm macro f/4, warm golden 4500K peach undertones, low contrast luminous highlight bloom lifted shadows soft golden grade",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Glow Model"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      }
+    ],
+    "_standalone_items": []
+  }
+}

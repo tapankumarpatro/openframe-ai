@@ -1,0 +1,420 @@
+{
+  "workflow_id": "luxury-leather-bag-enduring-craft",
+  "user_input": "Artisanal leather messenger bag",
+  "status": "completed",
+  "created_at": "2026-02-13T02:59:17.440382+00:00",
+  "result": {
+    "user_input": "Artisanal leather messenger bag",
+    "creative_brief": {
+      "campaign_title": "Whispers of Enduring Craft",
+      "concept_summary": "Forged in the timeless hands of artisans, the leather messenger bag captures the soul of heritage woven into every meticulous stitch. It accompanies the modern wanderer, bridging ancient mastery with the poetry of uncharted paths.",
+      "mood_keywords": [
+        "Timeless",
+        "Refined",
+        "Intimate",
+        "Adventurous",
+        "Soulful"
+      ],
+      "tagline": "Carry the Eternal Journey"
+    },
+    "visual_identity": {
+      "color_palette": [
+        "Deep Cognac",
+        "Warm Saddle Tan",
+        "Aged Parchment",
+        "Muted Sage"
+      ],
+      "textures_materials": "Supple full-grain leather, meticulous hand-stitched seams, patinated brass hardware, weathered canvas",
+      "composition_style": "Refined asymmetry, intimate focus on artisanal details with expansive negative space evoking uncharted paths"
+    },
+    "product_specs": {
+      "material_behavior": "Supple full-grain leather with a soft, pliant drape that molds gently to the body and sways naturally with movement, hand-stitched seams providing subtle structured edges, patinated brass hardware with a weighted swing, weathered canvas accents holding light creases and folds.",
+      "surface_detail": "Rich full-grain leather exhibiting natural pebbled texture and visible pores with a matte-satin finish catching soft, diffused highlights, meticulous thick-thread hand-stitched seams with precise saddle-stitch patterning, patinated brass hardware showing aged verdigris patina and polished lowlights, weathered canvas with frayed fibers, faded dye, and rough micro-texture.",
+      "styling_integration": "Cross-body messenger bag slung over one shoulder with adjustable leather strap draped across the torso, front flap secured by brass buckle and toggle, structured yet relaxed silhouette hanging at hip level.",
+      "visual_product_description": "Artisanal leather messenger bag crafted from supple full-grain leather with a soft, pliant drape that molds gently to the body and sways naturally with movement, featuring rich full-grain surface texture of natural pores and pebbled grain with matte-satin finish catching soft highlights, meticulous thick-thread hand-stitched seams, patinated brass hardware with aged verdigris and subtle sheen, and weathered canvas accents with frayed, faded micro-texture; worn cross-body slung over one shoulder, adjustable strap across the torso, front flap secured by brass buckle, evoking a relaxed high-fashion silhouette hanging at hip level."
+    },
+    "casting_brief": {
+      "cast_members": [
+        {
+          "name": "Modern Wanderer",
+          "driver_type": "human",
+          "visual_prompt": "Photorealistic full-body image of a 35-year-old modern wanderer, athletic build with a refined poised stance, soulful piercing green eyes, short tousled dark hair with subtle silver streaks, light stubble, warm tanned skin, wearing a timeless off-white linen shirt loosely fitted and slightly weathered, sleeves rolled up to elbows, slim khaki trousers with canvas accents tucked into rugged leather hiking boots, hands casually in pockets exuding quiet confidence and adventurous spirit, intimate soulful expression bridging heritage and exploration, high-resolution details on fabric textures and skin pores, cinematic soft lighting with subtle rim light, isolated on transparent background."
+        },
+        {
+          "name": "Artisan Hands",
+          "driver_type": "human",
+          "visual_prompt": "Photorealistic extreme close-up of skilled artisan's hands, male late 50s, strong veined forearms with weathered olive-toned skin showing faint scars and calluses from years of craftsmanship, fingers elegantly positioned in mid-stitch motion holding a traditional curved leather needle threaded with waxed cord, subtle patina on nails, meticulous detail on skin folds, knuckles, and hair, warm intimate sidelighting casting soft shadows to highlight timeless mastery and soulful dedication, high-resolution textures, isolated on transparent background."
+        }
+      ],
+      "setting_a_description": "Intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space evoking soulful craftsmanship.",
+      "setting_b_description": "Expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks and ferns, rugged earth trail with subtle overgrown vines and distant mountain silhouettes, diffused ethereal blue-gold light creating vast negative space, adventurous soulful mood with refined asymmetry of winding asymmetry and intimate foreground textures."
+    },
+    "camera_specs": {
+      "lighting": "Soft diffused natural light with large silk diffuser overhead, subtle sidelight from golden hour sun filtering through haze, gentle rim light on edges to accentuate leather textures and stitching",
+      "camera_gear": "Shot on Kodak Portra 400 film, Leica APO-Summicron-M 90mm f/2 ASPH lens, f/2.8 aperture",
+      "color_temperature": "Warm neutral with golden undertones, ~4800K",
+      "contrast_tone": "Medium-low contrast, soft highlight roll-off, lifted midtone shadows to reveal artisanal details, subtle vignette",
+      "technical_prompt_block": "soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette"
+    },
+    "shot_list": {
+      "scenes": [
+        {
+          "scene_number": 1,
+          "type": "Intro",
+          "shot_type": "Wide Shot",
+          "visual_description": "Establishing the timeless artisan workshop as hands prepare to craft the leather bag.",
+          "action_movement": "Artisan hands slowly descend from above frame towards the workbench, hovering poised above the leather pieces.",
+          "start_image_prompt": "Photorealistic wide shot of intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space, supple full-grain leather pieces with natural pores and pebbled grain laid out on workbench ready for assembly of artisanal leather messenger bag, skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses hovering elegantly positioned above poised to grasp, meticulous high-resolution details on textures, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic wide shot of intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space, supple full-grain leather pieces with natural pores and pebbled grain laid out on workbench ready for assembly of artisanal leather messenger bag, skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses now lowered gently grasping and pinching a leather piece, meticulous high-resolution details on textures, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Artisan Hands"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 2,
+          "type": "Detail",
+          "shot_type": "Close Up",
+          "visual_description": "Intimate detail of the artisan threading the needle, symbolizing meticulous heritage.",
+          "action_movement": "Fingers deftly thread the waxed cord through the curved leather needle's eye slowly.",
+          "start_image_prompt": "Photorealistic close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses subtle patina on nails, fingers elegantly positioned holding traditional curved leather needle above waxed cord in intimate timeless artisan workshop background blurred with workbench scattered tools rough-hewn beams stone walls, supple full-grain leather nearby, high-resolution details on skin folds knuckles hair, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses subtle patina on nails, fingers elegantly positioned having threaded waxed cord through curved leather needle's eye now pulling taut, intimate timeless artisan workshop background blurred with workbench scattered tools rough-hewn beams stone walls, supple full-grain leather nearby, high-resolution details on skin folds knuckles hair, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Artisan Hands"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 3,
+          "type": "Interaction",
+          "shot_type": "Extreme Close Up",
+          "visual_description": "Dynamic stitching motion capturing the soul of handcrafted seams.",
+          "action_movement": "Hands pierce leather with needle and pull thread through, forming a thick hand-stitched seam.",
+          "start_image_prompt": "Photorealistic extreme close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses, fingers positioned with curved needle poised to pierce supple full-grain leather of messenger bag panel with natural pores pebbled grain matte-satin finish thick-thread seam partially formed waxed cord ready, meticulous high-resolution textures skin folds knuckles hair leather pores in intimate workshop soft sidelight casting shadows, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic extreme close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses, fingers pulling waxed cord taut through pierced supple full-grain leather of messenger bag panel with natural pores pebbled grain matte-satin finish new thick-thread hand-stitched seam completed, meticulous high-resolution textures skin folds knuckles hair leather pores in intimate workshop soft sidelight casting shadows, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Artisan Hands"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 4,
+          "type": "Reveal",
+          "shot_type": "Medium Shot",
+          "visual_description": "The completed artisanal leather messenger bag is revealed on the workbench.",
+          "action_movement": "Hands gently place and pat the finished bag on the workbench, flap secured.",
+          "start_image_prompt": "Photorealistic medium shot of cluttered workbench in intimate timeless artisan workshop bathed in warm golden candlelight soft window glow rough-hewn wooden beams stone walls refined asymmetry pockets of shadow, nearly completed artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape rich full-grain surface texture natural pores pebbled grain matte-satin finish thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap almost secured adjustable strap draped, skilled artisan's hands hovering nearby, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic medium shot of cluttered workbench in intimate timeless artisan workshop bathed in warm golden candlelight soft window glow rough-hewn wooden beams stone walls refined asymmetry pockets of shadow, fully completed artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape rich full-grain surface texture natural pores pebbled grain matte-satin finish thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured by brass buckle adjustable strap draped ready, skilled artisan's hands gently patting it placed on bench, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Artisan Hands"
+          ],
+          "active_setting": "setting_a"
+        },
+        {
+          "scene_number": 5,
+          "type": "Transition",
+          "shot_type": "Wide Shot",
+          "visual_description": "Modern wanderer emerges on the misty path at dawn, bag now accompanying the journey.",
+          "action_movement": "Modern wanderer steps forward from misty foreground into the expansive path.",
+          "start_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry winding path intimate foreground textures, photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair subtle silver streaks light stubble warm tanned skin timeless off-white linen shirt loosely fitted weathered sleeves rolled slim khaki trousers canvas accents rugged leather hiking boots hands casually in pockets quiet confidence adventurous spirit intimate soulful expression, artisanal leather messenger bag slung over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level, standing at edge partially obscured by mist, high-resolution fabric skin details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry winding path intimate foreground textures, photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair subtle silver streaks light stubble warm tanned skin timeless off-white linen shirt loosely fitted weathered sleeves rolled slim khaki trousers canvas accents rugged leather hiking boots hands casually in pockets quiet confidence adventurous spirit intimate soulful expression, artisanal leather messenger bag slung over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level soft pliant drape molding to body, striding forward into path mist clearing, high-resolution fabric skin details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Modern Wanderer"
+          ],
+          "active_setting": "setting_b"
+        },
+        {
+          "scene_number": 6,
+          "type": "Interaction",
+          "shot_type": "Medium Shot",
+          "visual_description": "Wanderer adjusts the bag strap, showcasing its pliant drape and natural sway.",
+          "action_movement": "Wanderer reaches across body to adjust the adjustable strap, bag sways gently.",
+          "start_image_prompt": "Photorealistic medium shot of photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair light stubble warm tanned skin off-white linen shirt sleeves rolled khaki trousers hiking boots hands in pockets on expansive misty path dawn ancient oaks ferns rugged trail mist mountains diffused blue-gold light, artisanal leather messenger bag slung cross-body over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level supple full-grain leather soft pliant drape rich texture natural pores pebbled grain matte-satin thick-stitched seams patinated brass weathered canvas, strap slightly loose, high-res details cinematic soft lighting, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic medium shot of photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair light stubble warm tanned skin off-white linen shirt sleeves rolled khaki trousers hiking boots one hand adjusting strap on expansive misty path dawn ancient oaks ferns rugged trail mist mountains diffused blue-gold light, artisanal leather messenger bag slung cross-body over one shoulder adjustable strap tightened across torso front flap secured brass buckle hanging hip level supple full-grain leather soft pliant drape swaying naturally molding to body rich texture natural pores pebbled grain matte-satin thick-stitched seams patinated brass weathered canvas, high-res details cinematic soft lighting, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Modern Wanderer"
+          ],
+          "active_setting": "setting_b"
+        },
+        {
+          "scene_number": 7,
+          "type": "Hook",
+          "shot_type": "Close Up",
+          "visual_description": "Dynamic close-up of the bag swaying with movement, highlighting textures and craftsmanship.",
+          "action_movement": "Bag sways naturally with wanderer's stride, leather draping softly, highlights catching on patina.",
+          "start_image_prompt": "Photorealistic close up of artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape molding gently rich full-grain surface texture natural pores pebbled grain matte-satin finish catching soft highlights meticulous thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured brass buckle adjustable strap taut across blurred torso of modern wanderer on misty path background ancient oaks ferns diffused ethereal light, at rest position, high-resolution details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic close up of artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape swaying naturally molding to body rich full-grain surface texture natural pores pebbled grain matte-satin finish catching soft highlights meticulous thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured brass buckle adjustable strap taut across blurred torso of modern wanderer on misty path background ancient oaks ferns diffused ethereal light in motion sway position, high-resolution details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Modern Wanderer"
+          ],
+          "active_setting": "setting_b"
+        },
+        {
+          "scene_number": 8,
+          "type": "Closing",
+          "shot_type": "Wide Shot",
+          "visual_description": "Wanderer strides into the uncharted path, bag bridging heritage and adventure.",
+          "action_movement": "Wanderer walks confidently forward along the winding path into the misty distance.",
+          "start_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry, photorealistic full-body 35-year-old modern wanderer athletic build poised stance soulful green eyes tousled hair stubble tanned skin linen shirt khaki trousers boots bag slung cross-body hanging hip level, mid-stride facing away slightly, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "end_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry, photorealistic full-body 35-year-old modern wanderer athletic build poised stance soulful green eyes tousled hair stubble tanned skin linen shirt khaki trousers boots artisanal leather messenger bag slung cross-body swaying naturally, striding confidently deeper into winding path mist enveloping silhouette soulful expression bridging heritage exploration, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+          "active_cast": [
+            "Modern Wanderer"
+          ],
+          "active_setting": "setting_b"
+        }
+      ]
+    },
+    "audio_specs": {
+      "voiceover_script": "Timeless hands stitch heritage's soul into leather. For the wanderer, ancient mastery meets uncharted paths.",
+      "music_prompt_technical": "Chord Progression: Am – F – C – G | Am – F – Dm – E. Instrumentation: Felt piano (Ólafur Arnalds style), solo cello, subtle acoustic guitar plucks. Atmosphere: Long delicate reverb, intimate silences, soulful swells. Tempo: Slow, free-flowing, 65 BPM.",
+      "audio_atmosphere_description": "Soulful, intimate acoustic ambiance evoking timeless craft and adventurous heritage."
+    },
+    "_manual_items": [
+      {
+        "id": "product-main",
+        "type": "product",
+        "label": "Product",
+        "text_prompt": "Artisanal leather messenger bag crafted from supple full-grain leather with a soft, pliant drape that molds gently to the body and sways naturally with movement, featuring rich full-grain surface texture of natural pores and pebbled grain with matte-satin finish catching soft highlights, meticulous thick-thread hand-stitched seams, patinated brass hardware with aged verdigris and subtle sheen, and weathered canvas accents with frayed, faded micro-texture; worn cross-body slung over one shoulder, adjustable strap across the torso, front flap secured by brass buckle, evoking a relaxed high-fashion silhouette hanging at hip level."
+      },
+      {
+        "id": "cast-modern-wanderer",
+        "type": "character",
+        "label": "Modern Wanderer",
+        "driver_type": "human",
+        "text_prompt": "Photorealistic full-body image of a 35-year-old modern wanderer, athletic build with a refined poised stance, soulful piercing green eyes, short tousled dark hair with subtle silver streaks, light stubble, warm tanned skin, wearing a timeless off-white linen shirt loosely fitted and slightly weathered, sleeves rolled up to elbows, slim khaki trousers with canvas accents tucked into rugged leather hiking boots, hands casually in pockets exuding quiet confidence and adventurous spirit, intimate soulful expression bridging heritage and exploration, high-resolution details on fabric textures and skin pores, cinematic soft lighting with subtle rim light, isolated on transparent background."
+      },
+      {
+        "id": "cast-artisan-hands",
+        "type": "character",
+        "label": "Artisan Hands",
+        "driver_type": "human",
+        "text_prompt": "Photorealistic extreme close-up of skilled artisan's hands, male late 50s, strong veined forearms with weathered olive-toned skin showing faint scars and calluses from years of craftsmanship, fingers elegantly positioned in mid-stitch motion holding a traditional curved leather needle threaded with waxed cord, subtle patina on nails, meticulous detail on skin folds, knuckles, and hair, warm intimate sidelighting casting soft shadows to highlight timeless mastery and soulful dedication, high-resolution textures, isolated on transparent background."
+      },
+      {
+        "id": "env-a",
+        "type": "environment",
+        "label": "Setting A",
+        "text_prompt": "Intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space evoking soulful craftsmanship."
+      },
+      {
+        "id": "env-b",
+        "type": "environment",
+        "label": "Setting B",
+        "text_prompt": "Expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks and ferns, rugged earth trail with subtle overgrown vines and distant mountain silhouettes, diffused ethereal blue-gold light creating vast negative space, adventurous soulful mood with refined asymmetry of winding asymmetry and intimate foreground textures."
+      },
+      {
+        "id": "camera-main",
+        "type": "camera",
+        "label": "Camera & Lighting",
+        "text_prompt": "soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette"
+      },
+      {
+        "id": "vo-main",
+        "type": "voiceover",
+        "label": "Voiceover",
+        "text_prompt": "Timeless hands stitch heritage's soul into leather. For the wanderer, ancient mastery meets uncharted paths."
+      },
+      {
+        "id": "music-main",
+        "type": "music",
+        "label": "Music Prompt",
+        "text_prompt": "Chord Progression: Am – F – C – G | Am – F – Dm – E. Instrumentation: Felt piano (Ólafur Arnalds style), solo cello, subtle acoustic guitar plucks. Atmosphere: Long delicate reverb, intimate silences, soulful swells. Tempo: Slow, free-flowing, 65 BPM."
+      }
+    ],
+    "_manual_scenes": [
+      {
+        "id": "scene-1",
+        "scene_number": 1,
+        "type": "Intro",
+        "shot_type": "Wide Shot",
+        "visual_type": "Standard",
+        "visual_description": "Establishing the timeless artisan workshop as hands prepare to craft the leather bag.",
+        "action_movement": "Artisan hands slowly descend from above frame towards the workbench, hovering poised above the leather pieces.",
+        "start_image_prompt": "Photorealistic wide shot of intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space, supple full-grain leather pieces with natural pores and pebbled grain laid out on workbench ready for assembly of artisanal leather messenger bag, skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses hovering elegantly positioned above poised to grasp, meticulous high-resolution details on textures, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic wide shot of intimate timeless artisan workshop bathed in warm golden candlelight and soft window glow filtering through aged glass, rough-hewn wooden beams overhead, cluttered workbench with scattered hand tools like awls, mallets, and threads, stone walls etched with heritage patina, refined asymmetry with pockets of shadow and expansive negative space, supple full-grain leather pieces with natural pores and pebbled grain laid out on workbench ready for assembly of artisanal leather messenger bag, skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses now lowered gently grasping and pinching a leather piece, meticulous high-resolution details on textures, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Artisan Hands"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-2",
+        "scene_number": 2,
+        "type": "Detail",
+        "shot_type": "Close Up",
+        "visual_type": "Standard",
+        "visual_description": "Intimate detail of the artisan threading the needle, symbolizing meticulous heritage.",
+        "action_movement": "Fingers deftly thread the waxed cord through the curved leather needle's eye slowly.",
+        "start_image_prompt": "Photorealistic close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses subtle patina on nails, fingers elegantly positioned holding traditional curved leather needle above waxed cord in intimate timeless artisan workshop background blurred with workbench scattered tools rough-hewn beams stone walls, supple full-grain leather nearby, high-resolution details on skin folds knuckles hair, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses subtle patina on nails, fingers elegantly positioned having threaded waxed cord through curved leather needle's eye now pulling taut, intimate timeless artisan workshop background blurred with workbench scattered tools rough-hewn beams stone walls, supple full-grain leather nearby, high-resolution details on skin folds knuckles hair, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Artisan Hands"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-3",
+        "scene_number": 3,
+        "type": "Interaction",
+        "shot_type": "Extreme Close Up",
+        "visual_type": "Standard",
+        "visual_description": "Dynamic stitching motion capturing the soul of handcrafted seams.",
+        "action_movement": "Hands pierce leather with needle and pull thread through, forming a thick hand-stitched seam.",
+        "start_image_prompt": "Photorealistic extreme close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses, fingers positioned with curved needle poised to pierce supple full-grain leather of messenger bag panel with natural pores pebbled grain matte-satin finish thick-thread seam partially formed waxed cord ready, meticulous high-resolution textures skin folds knuckles hair leather pores in intimate workshop soft sidelight casting shadows, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic extreme close up of skilled artisan's hands male late 50s strong veined forearms weathered olive-toned skin faint scars calluses, fingers pulling waxed cord taut through pierced supple full-grain leather of messenger bag panel with natural pores pebbled grain matte-satin finish new thick-thread hand-stitched seam completed, meticulous high-resolution textures skin folds knuckles hair leather pores in intimate workshop soft sidelight casting shadows, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Artisan Hands"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-4",
+        "scene_number": 4,
+        "type": "Reveal",
+        "shot_type": "Medium Shot",
+        "visual_type": "Standard",
+        "visual_description": "The completed artisanal leather messenger bag is revealed on the workbench.",
+        "action_movement": "Hands gently place and pat the finished bag on the workbench, flap secured.",
+        "start_image_prompt": "Photorealistic medium shot of cluttered workbench in intimate timeless artisan workshop bathed in warm golden candlelight soft window glow rough-hewn wooden beams stone walls refined asymmetry pockets of shadow, nearly completed artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape rich full-grain surface texture natural pores pebbled grain matte-satin finish thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap almost secured adjustable strap draped, skilled artisan's hands hovering nearby, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic medium shot of cluttered workbench in intimate timeless artisan workshop bathed in warm golden candlelight soft window glow rough-hewn wooden beams stone walls refined asymmetry pockets of shadow, fully completed artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape rich full-grain surface texture natural pores pebbled grain matte-satin finish thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured by brass buckle adjustable strap draped ready, skilled artisan's hands gently patting it placed on bench, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Artisan Hands"
+        ],
+        "active_setting": "setting_a",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-5",
+        "scene_number": 5,
+        "type": "Transition",
+        "shot_type": "Wide Shot",
+        "visual_type": "Standard",
+        "visual_description": "Modern wanderer emerges on the misty path at dawn, bag now accompanying the journey.",
+        "action_movement": "Modern wanderer steps forward from misty foreground into the expansive path.",
+        "start_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry winding path intimate foreground textures, photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair subtle silver streaks light stubble warm tanned skin timeless off-white linen shirt loosely fitted weathered sleeves rolled slim khaki trousers canvas accents rugged leather hiking boots hands casually in pockets quiet confidence adventurous spirit intimate soulful expression, artisanal leather messenger bag slung over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level, standing at edge partially obscured by mist, high-resolution fabric skin details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry winding path intimate foreground textures, photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair subtle silver streaks light stubble warm tanned skin timeless off-white linen shirt loosely fitted weathered sleeves rolled slim khaki trousers canvas accents rugged leather hiking boots hands casually in pockets quiet confidence adventurous spirit intimate soulful expression, artisanal leather messenger bag slung over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level soft pliant drape molding to body, striding forward into path mist clearing, high-resolution fabric skin details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Modern Wanderer"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-6",
+        "scene_number": 6,
+        "type": "Interaction",
+        "shot_type": "Medium Shot",
+        "visual_type": "Standard",
+        "visual_description": "Wanderer adjusts the bag strap, showcasing its pliant drape and natural sway.",
+        "action_movement": "Wanderer reaches across body to adjust the adjustable strap, bag sways gently.",
+        "start_image_prompt": "Photorealistic medium shot of photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair light stubble warm tanned skin off-white linen shirt sleeves rolled khaki trousers hiking boots hands in pockets on expansive misty path dawn ancient oaks ferns rugged trail mist mountains diffused blue-gold light, artisanal leather messenger bag slung cross-body over one shoulder adjustable strap across torso front flap secured brass buckle hanging hip level supple full-grain leather soft pliant drape rich texture natural pores pebbled grain matte-satin thick-stitched seams patinated brass weathered canvas, strap slightly loose, high-res details cinematic soft lighting, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic medium shot of photorealistic full-body 35-year-old modern wanderer athletic build refined poised stance soulful piercing green eyes short tousled dark hair light stubble warm tanned skin off-white linen shirt sleeves rolled khaki trousers hiking boots one hand adjusting strap on expansive misty path dawn ancient oaks ferns rugged trail mist mountains diffused blue-gold light, artisanal leather messenger bag slung cross-body over one shoulder adjustable strap tightened across torso front flap secured brass buckle hanging hip level supple full-grain leather soft pliant drape swaying naturally molding to body rich texture natural pores pebbled grain matte-satin thick-stitched seams patinated brass weathered canvas, high-res details cinematic soft lighting, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Modern Wanderer"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-7",
+        "scene_number": 7,
+        "type": "Hook",
+        "shot_type": "Close Up",
+        "visual_type": "Standard",
+        "visual_description": "Dynamic close-up of the bag swaying with movement, highlighting textures and craftsmanship.",
+        "action_movement": "Bag sways naturally with wanderer's stride, leather draping softly, highlights catching on patina.",
+        "start_image_prompt": "Photorealistic close up of artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape molding gently rich full-grain surface texture natural pores pebbled grain matte-satin finish catching soft highlights meticulous thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured brass buckle adjustable strap taut across blurred torso of modern wanderer on misty path background ancient oaks ferns diffused ethereal light, at rest position, high-resolution details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic close up of artisanal leather messenger bag crafted from supple full-grain leather soft pliant drape swaying naturally molding to body rich full-grain surface texture natural pores pebbled grain matte-satin finish catching soft highlights meticulous thick-thread hand-stitched seams patinated brass hardware aged verdigris subtle sheen weathered canvas accents frayed faded micro-texture front flap secured brass buckle adjustable strap taut across blurred torso of modern wanderer on misty path background ancient oaks ferns diffused ethereal light in motion sway position, high-resolution details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Modern Wanderer"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      },
+      {
+        "id": "scene-8",
+        "scene_number": 8,
+        "type": "Closing",
+        "shot_type": "Wide Shot",
+        "visual_type": "Standard",
+        "visual_description": "Wanderer strides into the uncharted path, bag bridging heritage and adventure.",
+        "action_movement": "Wanderer walks confidently forward along the winding path into the misty distance.",
+        "start_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry, photorealistic full-body 35-year-old modern wanderer athletic build poised stance soulful green eyes tousled hair stubble tanned skin linen shirt khaki trousers boots bag slung cross-body hanging hip level, mid-stride facing away slightly, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "end_image_prompt": "Photorealistic wide shot expansive uncharted misty path at dawn weaving through ancient fog-shrouded oaks ferns rugged earth trail overgrown vines distant mountain silhouettes diffused ethereal blue-gold light vast negative space adventurous soulful mood refined asymmetry, photorealistic full-body 35-year-old modern wanderer athletic build poised stance soulful green eyes tousled hair stubble tanned skin linen shirt khaki trousers boots artisanal leather messenger bag slung cross-body swaying naturally, striding confidently deeper into winding path mist enveloping silhouette soulful expression bridging heritage exploration, high-res details, soft diffused natural light with large silk diffuser overhead and subtle golden hour sidelight, shot on Kodak Portra 400 film with Leica APO-Summicron-M 90mm f/2.8, warm neutral 4800K, medium-low contrast with soft highlights lifted shadows subtle vignette",
+        "start_video_prompt": "",
+        "end_video_prompt": "",
+        "combined_video_prompt": "",
+        "start_frame_status": "idle",
+        "end_frame_status": "idle",
+        "video_status": "idle",
+        "active_cast": [
+          "Modern Wanderer"
+        ],
+        "active_setting": "setting_b",
+        "audio_mode": "silent",
+        "dialogue": null,
+        "dialogue_speaker": null
+      }
+    ],
+    "_standalone_items": []
+  }
+}
