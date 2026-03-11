@@ -51,7 +51,7 @@ cp .env.example .env
 
 ```bash
 # Terminal 1 — Backend (auto-reload)
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload
 
 # Terminal 2 — Frontend (hot-reload)
 cd ui && npm run dev
@@ -97,7 +97,7 @@ docs: update API reference in README
 
 1. **Backend** — ensure the server starts without errors:
    ```bash
-   python -m uvicorn api.server:app --port 8000
+   python -m uvicorn api.server:app --port 8030
    ```
 
 2. **Frontend** — ensure TypeScript compiles cleanly:

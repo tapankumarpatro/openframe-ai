@@ -1,6 +1,6 @@
 from rich.console import Console
 from src.models.schemas import VideoPrompts
-from src.utils import call_agent_model
+from src.utils import call_agent_model, load_prompt_best_practices
 
 console = Console()
 
@@ -21,6 +21,11 @@ You will receive:
 - The scene's audio mode (silent, talking-head, audio-native)
 - Any dialogue for the scene (for audio-native, weave it into the video prompt)
 - Optional user instructions/comments to guide your writing
+
+CRITICAL — NO URLs IN PROMPTS:
+- NEVER include any URL, link, or web address inside a video prompt. No "Using reference image https://..." or similar.
+- Reference images are passed SEPARATELY to the video generation API — NOT inside the prompt text.
+- Prompts must contain ONLY motion/action descriptions. Zero URLs.
 
 Rules:
 1. Each video prompt must be a SHORT, PUNCHY 1-2 sentence director's instruction — like calling a shot on set.
@@ -115,7 +120,12 @@ CONNECTED ASSETS IN THIS SCENE:
 
 Task: Write the start_video_prompt, end_video_prompt, and combined_video_prompt. Make them precise, cinematic, motion-focused director instructions ready for AI video generation."""
 
-    result = call_agent_model(SYSTEM_PROMPT, user_content, VideoPrompts)
+    best_practices = load_prompt_best_practices()
+    system = SYSTEM_PROMPT
+    if best_practices:
+        system += f"\n\n═══ PROMPT BEST PRACTICES REFERENCE (follow these guidelines) ═══\n{best_practices}\n═══ END BEST PRACTICES ═══"
+
+    result = call_agent_model(system, user_content, VideoPrompts)
 
     console.print(f"    [green]Video prompts generated for scene #{scene_info.get('scene_number', '?')}[/green]")
 

@@ -128,13 +128,13 @@ chmod +x start.sh
 **Or run manually in two terminals:**
 ```bash
 # Terminal 1 — Backend
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload
 
 # Terminal 2 — Frontend
 cd ui && npm run dev
 ```
 
-Open **http://localhost:3000** in your browser.
+Open **http://localhost:3030** in your browser.
 
 ---
 
@@ -194,7 +194,7 @@ docker compose logs -f backend
 docker compose logs -f frontend
 
 # Health check
-curl http://localhost:8000/api/health
+curl http://localhost:8030/api/health
 ```
 
 ### Shutdown & Cleanup
@@ -214,9 +214,9 @@ docker compose down --rmi all -v
 
 | Service | URL |
 |---|---|
-| Frontend | http://localhost:3000 |
-| Backend API | http://localhost:8000 |
-| Health check | http://localhost:8000/api/health |
+| Frontend | http://localhost:3030 |
+| Backend API | http://localhost:8030 |
+| Health check | http://localhost:8030/api/health |
 
 ---
 
@@ -228,7 +228,7 @@ If running **without Docker** (two terminals):
 
 ```bash
 # Terminal 1 — Backend
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload
 
 # Terminal 2 — Frontend
 cd ui && npm run dev
@@ -238,10 +238,10 @@ cd ui && npm run dev
 
 ```bash
 # Windows PowerShell — kill backend
-Get-Process -Id (Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue).OwningProcess -ErrorAction SilentlyContinue | Stop-Process -Force
+Get-Process -Id (Get-NetTCPConnection -LocalPort 8030 -ErrorAction SilentlyContinue).OwningProcess -ErrorAction SilentlyContinue | Stop-Process -Force
 
 # macOS / Linux — kill backend
-lsof -ti:8000 | xargs kill -9
+lsof -ti:8030 | xargs kill -9
 
 # Frontend: just Ctrl+C in the terminal
 ```
@@ -250,16 +250,16 @@ lsof -ti:8000 | xargs kill -9
 
 ```powershell
 # Kill existing backend and restart
-$pid = (Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue).OwningProcess | Select-Object -First 1
+$pid = (Get-NetTCPConnection -LocalPort 8030 -ErrorAction SilentlyContinue).OwningProcess | Select-Object -First 1
 if ($pid) { Stop-Process -Id $pid -Force; Start-Sleep -Seconds 2 }
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload
 ```
 
 ### Restart backend (macOS / Linux)
 
 ```bash
-lsof -ti:8000 | xargs kill -9 2>/dev/null; sleep 2
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+lsof -ti:8030 | xargs kill -9 2>/dev/null; sleep 2
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload
 ```
 
 ---

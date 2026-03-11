@@ -34,6 +34,7 @@ from api.routes.audio_gen import router as audio_gen_router
 from api.routes.srt_gen import router as srt_router
 from api.routes.auth import router as auth_router
 from api.routes.license import router as license_router
+from api.routes.batch_gen import router as batch_gen_router
 
 app.include_router(health_router)
 app.include_router(workflow_router)
@@ -47,6 +48,7 @@ app.include_router(audio_gen_router)
 app.include_router(srt_router)
 app.include_router(auth_router)
 app.include_router(license_router)
+app.include_router(batch_gen_router)
 
 
 @app.on_event("startup")

@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000 (requires backend running on port 8000).
+Open http://localhost:3030 (requires backend running on port 8030).
 
 ## Tech Stack
 
@@ -55,7 +55,7 @@ src/
 
 | Variable | Default | Description |
 |---|---|---|
-| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Backend API base URL |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8030` | Backend API base URL |
 
 Set via `.env.local` or Docker build arg.
 
@@ -72,6 +72,6 @@ npm run lint      # ESLint check
 
 ```bash
 docker build -t openframe-ui \
-  --build-arg NEXT_PUBLIC_API_URL=http://your-backend:8000 .
-docker run -p 3000:3000 openframe-ui
+  --build-arg NEXT_PUBLIC_API_URL=http://your-backend:8030 .
+docker run -p 3030:3030 openframe-ui
 ```

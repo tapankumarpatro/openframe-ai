@@ -25,7 +25,7 @@ Closes #
 - [ ] My code follows the existing code style
 - [ ] I have tested my changes locally
 - [ ] Frontend builds clean: `cd ui && npm run build`
-- [ ] Backend starts without errors: `python -m uvicorn api.server:app --port 8000`
+- [ ] Backend starts without errors: `python -m uvicorn api.server:app --port 8030`
 - [ ] I have not committed any API keys or secrets
 - [ ] I have updated documentation if needed
 

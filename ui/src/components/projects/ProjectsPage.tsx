@@ -8,7 +8,7 @@ import {
   FolderPlus,
   Clock,
   Film,
-  Users,
+  Users, UserCheck,
   Trash2,
   Loader2,
   Plus,
@@ -549,6 +549,14 @@ export default function ProjectsPage({ user, onLogout }: ProjectsPageProps) {
             <p className="text-[12px] text-muted mt-0.5">The Open Source Ad Engine</p>
           </div>
           <div className="flex items-center gap-2.5">
+            <button
+              onClick={() => setView("hired_cast")}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white border border-amber-200 text-amber-600 hover:bg-amber-50 hover:border-amber-300 transition-all"
+              title="Manage Hired Cast"
+            >
+              <UserCheck className="w-4 h-4" />
+              <span className="text-[12px] font-medium">Hired Cast</span>
+            </button>
             <button
               onClick={() => setSettingsOpen(true)}
               className="p-2 rounded-lg bg-white border border-border text-muted hover:text-foreground hover:border-border-bright transition-all"

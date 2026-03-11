@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import ConsultTeamModal, { AGENTS, AgentAvatar } from "@/components/agents/ConsultTeamModal";
 import ProjectsPage from "@/components/projects/ProjectsPage";
 import ProjectStartModal from "@/components/overlay/ProjectStartModal";
+import HiredCastPage from "@/components/hired-cast/HiredCastPage";
 import ApiLogPanel from "@/components/logs/ApiLogPanel";
 import AuthPage, { AUTH_TOKEN_KEY, AUTH_USER_KEY } from "@/components/auth/AuthPage";
 import { authGetMe, type AuthUser } from "@/lib/api";
@@ -58,6 +59,23 @@ export default function Home() {
       <AuthPage
         onAuthenticated={(user) => setAuthUser(user)}
       />
+    );
+  }
+
+  if (view === "hired_cast") {
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div
+          key="hired_cast"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="h-screen w-screen flex overflow-hidden bg-background relative"
+        >
+          <HiredCastPage />
+        </motion.div>
+      </AnimatePresence>
     );
   }
 

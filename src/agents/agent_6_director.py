@@ -2,7 +2,7 @@ from difflib import SequenceMatcher
 from rich.console import Console
 from src.state import OpenFrameState, get_agent_llm_kwargs
 from src.models.schemas import ShotList
-from src.utils import call_agent_model
+from src.utils import call_agent_model, load_prompt_best_practices
 from src.ad_presets import get_ad_guidance, get_ad_config
 
 console = Console()
@@ -54,6 +54,13 @@ Output per scene:
 9. dialogue: The spoken line (ONLY if audio_mode is NOT "silent"). null otherwise.
 10. dialogue_speaker: Who speaks (cast member name or "narrator"). null if silent.
 11. scene_voice_prompt: TTS voice style description for talking-head/audio-native (e.g., "warm female voice, mid-20s, conversational, genuine enthusiasm"). null if silent.
+
+CRITICAL — NO URLs IN PROMPTS:
+- NEVER include any URL, link, or web address inside start_image_prompt, end_image_prompt, or any video prompt.
+- Reference images are passed SEPARATELY to the image generation API via image_input — NOT inside the prompt text.
+- Prompts must contain ONLY visual descriptions. Zero URLs.
+- Start each image prompt with the aspect ratio (e.g. "2:3." or "9:16.").
+- End each image prompt with realism/quality keywords.
 
 Ensure every scene re-states the lighting and style keywords for consistency.
 
@@ -123,6 +130,10 @@ Task: Generate the shot-by-shot list ({scene_min}-{scene_max} scenes). For each 
     ad_guidance = get_ad_guidance(state.get("ad_type"), "director")
     if ad_guidance:
         system += f"\n\n**AD TYPE GUIDANCE (you MUST follow this):**\n{ad_guidance}"
+
+    best_practices = load_prompt_best_practices()
+    if best_practices:
+        system += f"\n\n═══ PROMPT BEST PRACTICES REFERENCE (follow these guidelines for image & video prompts) ═══\n{best_practices}\n═══ END BEST PRACTICES ═══"
 
     result = call_agent_model(system, user_content, ShotList, **get_agent_llm_kwargs(state, "director"))
 

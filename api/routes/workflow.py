@@ -10,6 +10,7 @@ from api.models.api_schemas import (
     EnhanceVideoPromptsRequest, EnhanceVideoPromptsResponse,
     EnhanceSceneAudioRequest, EnhanceSceneAudioResponse,
     EnhanceAssetPromptRequest, EnhanceAssetPromptResponse,
+    EnhanceBatchInstructionsRequest, EnhanceBatchInstructionsResponse,
     RunSingleAgentRequest, RunSingleAgentResponse,
 )
 from api.services import runner
@@ -275,6 +276,67 @@ def _run_asset_prompt_writer(req: EnhanceAssetPromptRequest) -> str:
         user_parts.append("No existing prompt — write one from scratch.")
     if req.user_instructions:
         user_parts.append(f"User instructions: {req.user_instructions}")
+    user_msg = "\n\n".join(user_parts)
+    result = call_agent_model(system, user_msg)
+    return result.strip()
+
+
+@router.post("/enhance-batch-instructions", response_model=EnhanceBatchInstructionsResponse)
+async def enhance_batch_instructions(req: EnhanceBatchInstructionsRequest):
+    """Use LLM to write or enhance batch creator instructions."""
+    t0 = time.time()
+    log_entry = ApiLogger.log(
+        call_type="batch_instructions_enhancement",
+        model="prompt-writer",
+        provider="openrouter",
+        status="running",
+        input_summary=f"batch instructions: {(req.existing_instructions or req.user_hint or 'auto')[:80]}",
+        estimated_credits=0.005,
+    )
+    try:
+        result = await asyncio.get_event_loop().run_in_executor(
+            None,
+            lambda: _run_batch_instructions_writer(req),
+        )
+        ApiLogger.update(log_entry.id, status="success",
+                         duration_ms=int((time.time() - t0) * 1000),
+                         output_summary=f"Batch instructions: {len(result)} chars")
+        return EnhanceBatchInstructionsResponse(enhanced_instructions=result)
+    except Exception as e:
+        ApiLogger.update(log_entry.id, status="error", error_message=str(e),
+                         duration_ms=int((time.time() - t0) * 1000))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+def _run_batch_instructions_writer(req: EnhanceBatchInstructionsRequest) -> str:
+    from src.utils import call_agent_model
+    system = (
+        "You are an expert creative director for fashion & luxury advertising. "
+        "Your job is to write or improve batch image generation instructions. "
+        "These instructions guide an AI to generate multiple advertising image variations.\n\n"
+        "Write clear, vivid instructions that specify:\n"
+        "- The type of shoot (product photography, model photoshoot, campaign, lookbook, editorial, etc.)\n"
+        "- Visual style and mood (moody, bright, cinematic, minimalist, etc.)\n"
+        "- Environment/setting preferences\n"
+        "- Lighting and color palette direction\n"
+        "- Any specific poses, compositions, or angles\n"
+        "- What should vary across the batch (outfits, settings, moods, angles, etc.)\n\n"
+        "Keep it concise but detailed — 2-4 sentences. "
+        "Output ONLY the instructions text, nothing else. No quotes, no prefix."
+    )
+    user_parts = []
+    if req.existing_instructions:
+        user_parts.append(f"Current instructions to enhance:\n{req.existing_instructions}")
+    else:
+        user_parts.append("No existing instructions — write from scratch.")
+    if req.product_description:
+        user_parts.append(f"Product being advertised: {req.product_description[:300]}")
+    if req.cast_description:
+        user_parts.append(f"Cast/model description: {req.cast_description[:300]}")
+    if req.concept:
+        user_parts.append(f"Campaign concept: {req.concept}")
+    if req.user_hint:
+        user_parts.append(f"User hint: {req.user_hint}")
     user_msg = "\n\n".join(user_parts)
     result = call_agent_model(system, user_msg)
     return result.strip()

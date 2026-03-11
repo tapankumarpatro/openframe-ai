@@ -7,8 +7,8 @@ set -e
 
 echo ""
 echo "  OpenFrame AI — Starting..."
-echo "  Backend:  http://localhost:8000"
-echo "  Frontend: http://localhost:3000"
+echo "  Backend:  http://localhost:8030"
+echo "  Frontend: http://localhost:3030"
 echo ""
 
 # Activate venv if it exists
@@ -17,7 +17,7 @@ if [ -d "venv" ]; then
 fi
 
 # Start backend in background
-python -m uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload &
+python -m uvicorn api.server:app --host 0.0.0.0 --port 8030 --reload &
 BACKEND_PID=$!
 
 # Start frontend in background

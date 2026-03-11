@@ -14,6 +14,7 @@ export interface KeyItem {
   image_url?: string;
   image_history?: string[];
   reference_image?: string;
+  reference_images?: string[];  // Multiple reference photos (e.g. hired cast face shots)
   image_model?: string;
   image_quality?: string;
   image_error?: string;
@@ -41,6 +42,9 @@ export interface KeyItem {
   video_url?: string;
   video_status?: FrameStatus;
   video_error?: string;
+  // Permanent cast flag
+  is_permanent_cast?: boolean;
+  hired_cast_id?: string;
 }
 
 export interface Scene {
@@ -118,6 +122,66 @@ export interface Scene {
   end_video_model?: string;
   end_video_error?: string;
   end_video_duration?: number;
+}
+
+// ── Batch Creator types ──
+export interface BatchItem {
+  id: string;
+  prompt: string;
+  style_label: string;
+  ad_type?: string;
+  image_model?: string;
+  image_url?: string;
+  image_history?: string[];
+  image_status: FrameStatus;
+  image_error?: string;
+  video_url?: string;
+  video_status: VideoStatus;
+  video_error?: string;
+}
+
+export type BatchGenerationMode = "variations" | "unique_styles" | "model_photoshoot";
+
+export interface BatchHistoryEntry {
+  timestamp: number;
+  mode: BatchGenerationMode;
+  items: BatchItem[];
+}
+
+export interface BatchCreator {
+  id: string;
+  reference_image?: string;
+  product_image_url?: string;
+  user_comment: string;
+  batch_size: number;
+  items: BatchItem[];
+  agent_status: FrameStatus;
+  image_model?: string;
+  video_model?: string;
+  video_duration?: number;
+  audio_prompt?: string;
+  generation_mode?: BatchGenerationMode;
+  prompt_history?: BatchHistoryEntry[];
+  // Connected asset IDs — synced from React Flow edges so the store can look up images directly
+  connected_cast_id?: string;    // keyItem ID of connected cast card
+  connected_product_id?: string; // keyItem ID of connected product card
+  connected_ref_id?: string;     // keyItem ID of connected general reference card
+}
+
+// ── Hired Cast types ──
+export interface HiredCast {
+  id: string;
+  name: string;
+  driver_type: string;  // human, animal, object, etc.
+  description: string;  // visual description / prompt text
+  images: string[];     // up to 20 reference images (data URLs or http URLs)
+  gender?: string;
+  age_range?: string;
+  ethnicity?: string;
+  physical_details?: string;  // height, build, hair, eyes, etc.
+  notes?: string;
+  created_at: number;
+  updated_at: number;
 }
 
 export type AgentStatus = "idle" | "running" | "done" | "error";

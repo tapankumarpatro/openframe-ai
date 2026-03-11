@@ -1,15 +1,37 @@
 import os
 import time
-from typing import Optional
+from typing import Optional, List
 from rich.console import Console
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
+from langchain_core.messages import HumanMessage, SystemMessage
 from dotenv import load_dotenv
 
 load_dotenv()
 
 console = Console()
+
+# ── Prompt Best Practices loader ──
+
+_best_practices_cache: Optional[str] = None
+
+
+def load_prompt_best_practices() -> str:
+    """Load the prompt best practices guide from prompt_best_pratice.md.
+    Cached after first read. Returns empty string if file not found."""
+    global _best_practices_cache
+    if _best_practices_cache is not None:
+        return _best_practices_cache
+    best_practices_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompt_best_pratice.md")
+    try:
+        with open(best_practices_path, "r", encoding="utf-8") as f:
+            _best_practices_cache = f.read()
+        console.print(f"    [dim]Loaded prompt best practices ({len(_best_practices_cache)} chars)[/dim]")
+    except FileNotFoundError:
+        console.print(f"    [yellow]⚠ prompt_best_pratice.md not found at {best_practices_path}[/yellow]")
+        _best_practices_cache = ""
+    return _best_practices_cache
 
 # Default model — prefer paid model, fallback to free
 DEFAULT_MODEL = os.getenv("OPENROUTER_PAID_MODEL") or os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.3-70b-instruct:free")
@@ -193,3 +215,67 @@ def call_agent_model(
             # All other errors → fatal
             raise
     raise RuntimeError(f"Failed after {MAX_RETRIES} retries due to rate limiting.")
+
+
+# ── Vision model (Gemini) for image analysis ──
+
+VISION_MODEL = os.getenv("OPENROUTER_VISION_MODEL", "google/gemini-2.5-pro-preview")
+
+
+def call_vision_model(
+    system_prompt: str,
+    user_text: str,
+    image_urls: List[str],
+    model_name: Optional[str] = None,
+    temperature: Optional[float] = None,
+) -> str:
+    """
+    Call a vision-capable model (Gemini 2.5 Pro) with text + image(s).
+    Returns raw text response.
+    Uses OpenRouter's OpenAI-compatible multimodal message format.
+    """
+    global _last_call_time
+
+    elapsed = time.time() - _last_call_time
+    if elapsed < CALL_COOLDOWN and _last_call_time > 0:
+        wait = CALL_COOLDOWN - elapsed
+        console.print(f"    [dim]Cooldown: waiting {wait:.0f}s before next vision call...[/dim]")
+        time.sleep(wait)
+
+    model = model_name or VISION_MODEL
+    temp = temperature if temperature is not None else 0.3  # Lower temp for analysis
+    active_llm = _get_llm(model, temp)
+    console.print(f"    [dim]Vision model: {model} (temp={temp})[/dim]")
+
+    # Build multimodal content blocks
+    content_blocks: list = [{"type": "text", "text": user_text}]
+    for url in image_urls:
+        content_blocks.append({
+            "type": "image_url",
+            "image_url": {"url": url},
+        })
+
+    messages = [
+        SystemMessage(content=system_prompt),
+        HumanMessage(content=content_blocks),
+    ]
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            result = active_llm.invoke(messages)
+            _last_call_time = time.time()
+            return result.content if hasattr(result, "content") else str(result)
+        except Exception as e:
+            error_str = str(e)
+            if "429" in error_str or "rate" in error_str.lower():
+                delay = BASE_DELAY * (2 ** (attempt - 1))
+                console.print(f"    [yellow]⚠ Rate limited (attempt {attempt}/{MAX_RETRIES}). Waiting {delay}s...[/yellow]")
+                time.sleep(delay)
+                continue
+            if any(code in error_str for code in ("500", "502", "503")):
+                delay = BASE_DELAY * attempt
+                console.print(f"    [yellow]⚠ Server error (attempt {attempt}/{MAX_RETRIES}). Waiting {delay}s...[/yellow]")
+                time.sleep(delay)
+                continue
+            raise
+    raise RuntimeError(f"Vision model call failed after {MAX_RETRIES} retries.")

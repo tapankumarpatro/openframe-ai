@@ -54,8 +54,8 @@ OpenFrame AI connects to external services that require API keys. Here's how key
 
 ### Network
 
-- Backend binds to `0.0.0.0:8000` by default (accessible on LAN)
-- Frontend connects to backend via `NEXT_PUBLIC_API_URL` (default: `http://localhost:8000`)
+- Backend binds to `0.0.0.0:8030` by default (accessible on LAN)
+- Frontend connects to backend via `NEXT_PUBLIC_API_URL` (default: `http://localhost:8030`)
 - All external API calls go to: OpenRouter, kie.ai, ImgBB, ElevenLabs
 - No telemetry, no analytics, no phone-home
 
@@ -72,7 +72,7 @@ OpenFrame AI connects to external services that require API keys. Here's how key
 2. Restrict CORS origins in `api/server.py`
 3. Use HTTPS (reverse proxy with nginx/caddy)
 4. Restrict network access (firewall rules)
-5. Do NOT expose port 8000 directly to the internet without auth
+5. Do NOT expose port 8030 directly to the internet without auth
 
 ### Docker
 - The `docker-compose.yml` mounts `.env` into the container

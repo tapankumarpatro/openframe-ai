@@ -108,6 +108,17 @@ class VideoPrompts(BaseModel):
     combined_video_prompt: str = Field(description="Director-style video prompt for the full start-to-end transition")
 
 
+# --- Agent 11: Batch Creator (on-demand) ---
+class BatchPromptItem(BaseModel):
+    style_label: str = Field(description="Short label for this variation style (e.g., 'Moody Noir', 'Golden Hour')")
+    ad_type: str = Field(description="Ad category for this variation: 'luxury', 'commercial', 'ugc', 'editorial', 'cinematic', or 'beauty'")
+    prompt: str = Field(description="Full text-to-image prompt for this variation")
+
+
+class BatchPrompts(BaseModel):
+    items: List[BatchPromptItem] = Field(description="Array of distinct image prompt variations")
+
+
 # --- Agent 9: Scene Audio Enhancer (on-demand, per-scene) ---
 class SceneAudioEnhancement(BaseModel):
     dialogue: str = Field(description="The spoken dialogue line for this scene")

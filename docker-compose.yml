@@ -4,9 +4,13 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     ports:
-      - "8000:8000"
+      - "8030:8030"
     env_file:
       - .env
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+      - 8.8.4.4
     volumes:
       - ./data:/app/data               # SQLite database
       - ./output:/app/output            # Generated outputs
@@ -18,8 +22,8 @@ services:
       context: ./ui
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_API_URL: http://localhost:8030
     ports:
-      - "3000:3000"
+      - "3030:3030"
     depends_on:
       - backend

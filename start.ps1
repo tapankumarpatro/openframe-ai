@@ -3,12 +3,12 @@
 # Stop:  Ctrl+C (kills both processes)
 
 Write-Host "`n  OpenFrame AI — Starting..." -ForegroundColor Cyan
-Write-Host "  Backend:  http://localhost:8000" -ForegroundColor DarkGray
-Write-Host "  Frontend: http://localhost:3000`n" -ForegroundColor DarkGray
+Write-Host "  Backend:  http://localhost:8030" -ForegroundColor DarkGray
+Write-Host "  Frontend: http://localhost:3030`n" -ForegroundColor DarkGray
 
 # Start backend in background
 $backend = Start-Process -NoNewWindow -PassThru -FilePath "python" `
-    -ArgumentList "-m", "uvicorn", "api.server:app", "--host", "0.0.0.0", "--port", "8000", "--reload" `
+    -ArgumentList "-m", "uvicorn", "api.server:app", "--host", "0.0.0.0", "--port", "8030", "--reload" `
     -WorkingDirectory $PSScriptRoot
 
 # Start frontend in background

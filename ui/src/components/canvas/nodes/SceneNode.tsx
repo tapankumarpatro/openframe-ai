@@ -90,6 +90,10 @@ type SceneNodeData = {
 const IMAGE_MODELS = [
   { id: "seedream/4.5",      label: "Seedream 4.5",        qualities: ["basic", "high"],       supportsImageInput: true },
   { id: "nano-banana/pro",   label: "Nano Banana Pro",     qualities: ["1K", "2K", "4K"],      supportsImageInput: true },
+  { id: "nano-banana/2",     label: "Nano Banana 2",       qualities: ["1K", "2K", "4K"],      supportsImageInput: true },
+  { id: "qwen/image-edit",   label: "Qwen Edit",           qualities: ["basic"],               supportsImageInput: true },
+  { id: "flux-kontext/pro",  label: "Flux Kontext Pro",    qualities: ["basic"],               supportsImageInput: true },
+  { id: "flux-kontext/max",  label: "Flux Kontext Max",    qualities: ["basic"],               supportsImageInput: true },
   { id: "gpt-image/1.5-i2i", label: "GPT Image 1.5 i2i",  qualities: ["medium", "high"],      supportsImageInput: true },
   { id: "z-image/1.0",       label: "Z Image",             qualities: [],                      supportsImageInput: false },
 ];

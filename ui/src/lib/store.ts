@@ -6,10 +6,13 @@ import type {
   AgentStatus,
   AssetType,
   FrameStatus,
+  BatchCreator,
+  BatchItem,
 } from "@/types/schema";
-import { startWorkflow, resumeWorkflow, subscribeToWorkflow, fetchProject, saveProject, enhancePrompts, enhanceVideoPrompts, enhanceAssetPrompt, enhanceSceneAudio, runSingleAgent, generateImage, getImageTaskStatus, uploadImage, generateVideo as apiGenerateVideo, getVideoTaskStatus, generateVoiceover, generateMusic, getAudioTaskStatus, getMusicTaskStatus, fetchLicenseStatus as apiFetchLicenseStatus, type SSEEvent, type LicenseStatus } from "./api";
+import { useHiredCastStore } from "./hiredCastStore";
+import { startWorkflow, resumeWorkflow, subscribeToWorkflow, fetchProject, saveProject, enhancePrompts, enhanceVideoPrompts, enhanceAssetPrompt, enhanceSceneAudio, enhanceBatchInstructions, runSingleAgent, generateImage, getImageTaskStatus, uploadImage, generateVideo as apiGenerateVideo, getVideoTaskStatus, generateVoiceover, generateMusic, getAudioTaskStatus, getMusicTaskStatus, fetchLicenseStatus as apiFetchLicenseStatus, generateBatchPrompts as apiBatchPrompts, type SSEEvent, type LicenseStatus } from "./api";
 
-export type AppView = "projects" | "canvas" | "create";
+export type AppView = "projects" | "canvas" | "create" | "hired_cast";
 
 // ── OpenRouter Model Registry ──────────────────────────────
 export interface LLMModel {
@@ -400,6 +403,20 @@ interface StoreState {
   retryWorkflow: () => Promise<void>;
   resumePendingTasks: () => void;
   reset: () => void;
+  // Batch Creator
+  batchCreators: BatchCreator[];
+  addBatchCreator: () => string;
+  removeBatchCreator: (id: string) => void;
+  updateBatchCreator: (id: string, updates: Partial<BatchCreator>) => void;
+  generateBatchPrompts: (batchId: string, referenceImageUrl?: string, productDescription?: string, productImageUrl?: string, castDescription?: string, castImageUrl?: string) => Promise<void>;
+  generateBatchImage: (batchId: string, itemId: string) => Promise<void>;
+  generateBatchAllImages: (batchId: string) => Promise<void>;
+  selectBatchImageFromHistory: (batchId: string, itemId: string, imageUrl: string) => void;
+  enhanceBatchInstructions: (batchId: string, userHint?: string) => Promise<void>;
+  generateBatchVideo: (batchId: string, itemId: string) => Promise<void>;
+  generateBatchAllVideos: (batchId: string) => Promise<void>;
+  // Permanent Cast
+  addPermanentCast: (name?: string) => string;
 }
 
 // Deterministic slug for stable IDs across rebuilds
@@ -524,12 +541,13 @@ function parseAgentData(agentName: string, data: Record<string, unknown>): { ite
 }
 
 // ── Helper: build full save payload for any project ──
-function _buildSaveResult(state: { agentOutputs: Record<string, Record<string, unknown>>; keyItems: KeyItem[]; scenes: Scene[]; productImage: string | null; adType: string | null }): Record<string, unknown> {
+function _buildSaveResult(state: { agentOutputs: Record<string, Record<string, unknown>>; keyItems: KeyItem[]; scenes: Scene[]; productImage: string | null; adType: string | null; batchCreators: BatchCreator[] }): Record<string, unknown> {
   return {
     ...state.agentOutputs,
     _standalone_items: state.keyItems.filter((k) => k.type === "image" || k.type === "video"),
     _manual_items: state.keyItems,
     _manual_scenes: state.scenes,
+    _batch_creators: state.batchCreators,
     product_image: state.productImage || undefined,
     ad_type: state.adType || undefined,
   };
@@ -562,6 +580,7 @@ export const useStore = create<StoreState>((set, get) => ({
   productImage: null,
   error: null,
   unsubscribe: null,
+  batchCreators: [],
   licenseStatus: null,
   showLicenseUpgrade: false,
 
@@ -640,12 +659,15 @@ export const useStore = create<StoreState>((set, get) => ({
       }
     }
 
+    // Cancel any pending save from a previous workflow
+    if (_saveTimer) { clearTimeout(_saveTimer); _saveTimer = null; }
     set({
       view: "canvas",
       isRunning: aiAssist,
       error: null,
       keyItems: [],
       scenes: [],
+      batchCreators: [],
       userInput: idea,
       adType: adType || null,
       productImage: productImageUrl,
@@ -822,11 +844,14 @@ export const useStore = create<StoreState>((set, get) => ({
   },
 
   loadProject: async (workflowId: string) => {
+    // Cancel any pending save from the previous workflow to prevent contamination
+    if (_saveTimer) { clearTimeout(_saveTimer); _saveTimer = null; }
     set({
       isRunning: false,
       error: null,
       keyItems: [],
       scenes: [],
+      batchCreators: [],
       workflowId,
       agents: DEFAULT_AGENTS.map((a) => ({ ...a, status: "idle" as AgentStatus })),
     });
@@ -897,6 +922,12 @@ export const useStore = create<StoreState>((set, get) => ({
       if (savedScenes && Array.isArray(savedScenes) && savedScenes.length > 0) {
         allScenes.length = 0;
         allScenes.push(...savedScenes);
+      }
+
+      // Restore batch creators from saved data (per-workflow isolation)
+      const savedBatch = result._batch_creators as BatchCreator[] | undefined;
+      if (savedBatch && Array.isArray(savedBatch) && savedBatch.length > 0) {
+        set({ batchCreators: savedBatch });
       }
 
       // Set agent statuses based on which outputs actually exist
@@ -977,6 +1008,30 @@ export const useStore = create<StoreState>((set, get) => ({
               if (k.audio_status === "generating" && !pendingTargets.has(`${k.id}::audio_status`)) {
                 updated.audio_status = "error" as FrameStatus;
                 updated.audio_error = "Generation interrupted — please retry";
+              }
+              return updated;
+            }),
+          }));
+        }
+        // BatchCreators — reset stuck agent_status and item image_status
+        const stuckBatch = get().batchCreators.filter((bc) =>
+          bc.agent_status === "generating" ||
+          bc.items.some((it) => it.image_status === "generating")
+        );
+        if (stuckBatch.length > 0) {
+          console.log(`[Recovery] Resetting ${stuckBatch.length} stuck batch creator(s)`);
+          set((s) => ({
+            batchCreators: s.batchCreators.map((bc) => {
+              let updated = { ...bc };
+              if (bc.agent_status === "generating") {
+                updated.agent_status = "error" as FrameStatus;
+              }
+              if (bc.items.some((it) => it.image_status === "generating")) {
+                updated.items = bc.items.map((it) =>
+                  it.image_status === "generating"
+                    ? { ...it, image_status: "error" as FrameStatus, image_error: "Generation interrupted — please retry" }
+                    : it
+                );
               }
               return updated;
             }),
@@ -1518,22 +1573,33 @@ export const useStore = create<StoreState>((set, get) => ({
   },
 
   setAssetImage: (assetId, imageUrl) => {
-    // Set immediately for display
+    // Set immediately for display + add to reference_images for cast cards
     set((state) => ({
       keyItems: state.keyItems.map((k) => {
         if (k.id !== assetId) return k;
         const history = [...(k.image_history || []), imageUrl];
-        return { ...k, image_url: imageUrl, image_history: history };
+        // Also add to reference_images so batch creator picks it up
+        const refs = new Set(k.reference_images || []);
+        refs.add(imageUrl);
+        return { ...k, image_url: imageUrl, image_history: history, reference_images: Array.from(refs) };
       }),
     }));
     // If base64, upload in background to get HTTP URL for reference image usage
     if (imageUrl.startsWith("data:")) {
       uploadImage(imageUrl).then((httpUrl) => {
-        // Replace base64 with HTTP URL for reference usage
+        // Replace base64 with HTTP URL in both image_url and reference_images
         set((state) => ({
-          keyItems: state.keyItems.map((k) =>
-            k.id === assetId && k.image_url === imageUrl ? { ...k, image_url: httpUrl } : k
-          ),
+          keyItems: state.keyItems.map((k) => {
+            if (k.id !== assetId) return k;
+            const updatedRefs = (k.reference_images || []).map((r) => r === imageUrl ? httpUrl : r);
+            // Dedupe
+            const deduped = Array.from(new Set(updatedRefs));
+            return {
+              ...k,
+              image_url: k.image_url === imageUrl ? httpUrl : k.image_url,
+              reference_images: deduped,
+            };
+          }),
         }));
         _debouncedSave(get);
       }).catch((err) => console.warn("[setAssetImage] Upload failed:", err));
@@ -2260,7 +2326,382 @@ export const useStore = create<StoreState>((set, get) => ({
     }
   },
 
+  // ── Batch Creator actions ──────────────────────────────────
+  addBatchCreator: () => {
+    const id = `batch-${Date.now()}`;
+    const bc: BatchCreator = {
+      id,
+      user_comment: "",
+      batch_size: 5,
+      items: [],
+      agent_status: "idle" as FrameStatus,
+      image_model: "nano-banana/2",
+      video_model: "kling-3.0/video",
+      video_duration: 5,
+    };
+    set((s) => ({ batchCreators: [...s.batchCreators, bc] }));
+    _debouncedSave(get);
+    return id;
+  },
+
+  removeBatchCreator: (id) => {
+    set((s) => ({ batchCreators: s.batchCreators.filter((b) => b.id !== id) }));
+    _debouncedSave(get);
+  },
+
+  updateBatchCreator: (id, updates) => {
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) => b.id === id ? { ...b, ...updates } : b),
+    }));
+    _debouncedSave(get);
+  },
+
+  generateBatchPrompts: async (batchId, referenceImageUrl?: string, productDescription?: string, productImageUrl?: string, castDescription?: string, castImageUrl?: string) => {
+    const state = get();
+    const bc = state.batchCreators.find((b) => b.id === batchId);
+    if (!bc) return;
+
+    // Save current items to history before regenerating
+    const prevHistory = bc.prompt_history || [];
+    const historyEntry = bc.items.length > 0
+      ? { timestamp: Date.now(), mode: bc.generation_mode || "unique_styles" as const, items: bc.items }
+      : null;
+    const newHistory = historyEntry ? [...prevHistory, historyEntry] : prevHistory;
+
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) =>
+        b.id === batchId ? { ...b, agent_status: "generating" as FrameStatus, items: [], product_image_url: productImageUrl || b.product_image_url, prompt_history: newHistory } : b
+      ),
+    }));
+
+    try {
+      const brief = (state.agentOutputs.creative_brief || {}) as Record<string, unknown>;
+      const camera = (state.agentOutputs.camera_specs || {}) as Record<string, unknown>;
+      const concept = (brief.concept_summary as string) || "";
+      const techSpecs = (camera.technical_prompt_block as string) || "";
+      const mode = bc.generation_mode || "unique_styles";
+
+      const timeoutMs = 180_000; // 3 minute timeout
+      const res = await Promise.race([
+        apiBatchPrompts({
+          reference_description: bc.user_comment,
+          reference_image_url: referenceImageUrl || bc.reference_image || "",
+          user_instructions: bc.user_comment,
+          batch_size: bc.batch_size,
+          concept,
+          technical_specs: techSpecs,
+          product_description: productDescription || "",
+          product_image_url: productImageUrl || "",
+          generation_mode: mode,
+          cast_description: castDescription || "",
+          cast_image_url: castImageUrl || "",
+        }),
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error("Prompt generation timed out after 3 minutes. Please try again.")), timeoutMs)),
+      ]);
+
+      const items: BatchItem[] = res.items.map((item, i) => ({
+        id: `${batchId}-item-${i}`,
+        prompt: item.prompt,
+        style_label: item.style_label,
+        ad_type: (item as unknown as Record<string, unknown>).ad_type as string || undefined,
+        image_status: "idle" as FrameStatus,
+        video_status: "idle" as FrameStatus,
+      }));
+
+      set((s) => ({
+        batchCreators: s.batchCreators.map((b) =>
+          b.id === batchId ? { ...b, agent_status: "done" as FrameStatus, items } : b
+        ),
+      }));
+    } catch (err) {
+      console.error("[BatchCreator] Prompt generation failed:", err);
+      set((s) => ({
+        batchCreators: s.batchCreators.map((b) =>
+          b.id === batchId ? { ...b, agent_status: "error" as FrameStatus } : b
+        ),
+      }));
+    }
+    _debouncedSave(get);
+  },
+
+  generateBatchImage: async (batchId, itemId) => {
+    const state = get();
+    const bc = state.batchCreators.find((b) => b.id === batchId);
+    const item = bc?.items.find((it) => it.id === itemId);
+    if (!bc || !item) return;
+
+    // Push old image to history before clearing, then set generating
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) =>
+        b.id === batchId
+          ? { ...b, items: b.items.map((it) => {
+              if (it.id !== itemId) return it;
+              const history = [...(it.image_history || [])];
+              if (it.image_url && it.image_url.startsWith("http")) {
+                if (!history.includes(it.image_url)) history.push(it.image_url);
+              }
+              return { ...it, image_url: undefined, image_history: history, image_status: "generating" as FrameStatus, image_error: undefined };
+            }) }
+          : b
+      ),
+    }));
+
+    try {
+      const aspect = state.projectAspectRatio === "auto" ? "1:1" : state.projectAspectRatio;
+      const isImg = (u?: string) => !!u && (u.startsWith("http") || u.startsWith("data:image"));
+
+      // ── Self-lookup: collect ALL reference images from stored connection IDs ──
+      const refImages: string[] = [];
+      const seen = new Set<string>();
+      const addImg = (u: string) => { if (isImg(u) && !seen.has(u)) { seen.add(u); refImages.push(u); } };
+
+      // 1. Cast images (highest priority — face consistency)
+      if (bc.connected_cast_id) {
+        const castItem = state.keyItems.find((k) => k.id === bc.connected_cast_id);
+        if (castItem) {
+          if (castItem.is_permanent_cast) {
+            // Try LIVE images from hiredCastStore first (always current)
+            const hcStore = useHiredCastStore.getState();
+            const hc = castItem.hired_cast_id
+              ? hcStore.hiredCast.find((c) => c.id === castItem.hired_cast_id)
+              : hcStore.hiredCast.find((c) => c.name === castItem.label);
+            const beforeCount = refImages.length;
+            if (hc) for (const u of hc.images) addImg(u);
+            // Fallback: if hiredCastStore yielded nothing, use synced keyItem images
+            // (keyItem is kept in sync by DirectorCanvas useEffect)
+            if (refImages.length === beforeCount) {
+              console.warn("[BatchImage] hiredCastStore lookup yielded no images, falling back to keyItem fields");
+              if (castItem.image_url) addImg(castItem.image_url);
+              for (const u of (castItem.reference_images || [])) addImg(u);
+              if (castItem.reference_image) addImg(castItem.reference_image);
+            }
+          } else {
+            // Non-permanent cast (agent-generated) — use keyItem fields
+            if (castItem.image_url) addImg(castItem.image_url);
+            for (const u of (castItem.reference_images || [])) addImg(u);
+            if (castItem.reference_image) addImg(castItem.reference_image);
+          }
+        }
+      }
+
+      // 2. Product image
+      if (bc.connected_product_id) {
+        const prodItem = state.keyItems.find((k) => k.id === bc.connected_product_id);
+        if (prodItem?.image_url) addImg(prodItem.image_url);
+      } else if (bc.product_image_url) {
+        addImg(bc.product_image_url);
+      }
+
+      // 3. General reference image
+      if (bc.connected_ref_id) {
+        const refItem = state.keyItems.find((k) => k.id === bc.connected_ref_id);
+        if (refItem?.image_url) addImg(refItem.image_url);
+      }
+
+      // 4. Fallback to batch creator's own reference_image
+      if (refImages.length === 0 && isImg(bc.reference_image)) addImg(bc.reference_image!);
+
+      console.warn(`[BatchImage] generateBatchImage called:`, {
+        itemId, batchId,
+        connected_cast_id: bc.connected_cast_id,
+        connected_product_id: bc.connected_product_id,
+        connected_ref_id: bc.connected_ref_id,
+        refImages,
+        model: item.image_model || bc.image_model || "nano-banana/2",
+      });
+
+      // Guard: require at least one reference image before calling the API
+      if (refImages.length === 0) {
+        set((s) => ({
+          batchCreators: s.batchCreators.map((b) =>
+            b.id === batchId
+              ? { ...b, items: b.items.map((it) => it.id === itemId ? { ...it, image_status: "error" as FrameStatus, image_error: "No reference images attached. Connect a cast or product card with images first." } : it) }
+              : b
+          ),
+        }));
+        return;
+      }
+
+      const { task_id, provider } = await generateImage({
+        prompt: item.prompt,
+        model: item.image_model || bc.image_model || "nano-banana/2",
+        aspect_ratio: aspect,
+        image_urls: refImages.length > 0 ? refImages : undefined,
+      });
+
+      // Poll
+      for (let i = 0; i < 120; i++) {
+        await new Promise((r) => setTimeout(r, 3000));
+        const status = await getImageTaskStatus(task_id, provider);
+        if (status.state === "success" && status.result_urls?.length) {
+          set((s) => ({
+            batchCreators: s.batchCreators.map((b) =>
+              b.id === batchId
+                ? { ...b, items: b.items.map((it) => {
+                    if (it.id !== itemId) return it;
+                    const newUrl = status.result_urls![0];
+                    const history = [...(it.image_history || [])];
+                    if (newUrl && !history.includes(newUrl)) history.push(newUrl);
+                    return { ...it, image_url: newUrl, image_history: history, image_status: "done" as FrameStatus };
+                  }) }
+                : b
+            ),
+          }));
+          _debouncedSave(get);
+          return;
+        }
+        if (status.state === "fail") throw new Error(status.error_message || "Image generation failed");
+      }
+      throw new Error("Timeout waiting for image");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      set((s) => ({
+        batchCreators: s.batchCreators.map((b) =>
+          b.id === batchId
+            ? { ...b, items: b.items.map((it) => it.id === itemId ? { ...it, image_status: "error" as FrameStatus, image_error: msg } : it) }
+            : b
+        ),
+      }));
+    }
+    _debouncedSave(get);
+  },
+
+  generateBatchAllImages: async (batchId) => {
+    const bc = get().batchCreators.find((b) => b.id === batchId);
+    if (!bc) return;
+    const pending = bc.items.filter((it) => it.image_status === "idle" || it.image_status === "error");
+    // Fire all in parallel (max 5 concurrent)
+    const chunks: BatchItem[][] = [];
+    for (let i = 0; i < pending.length; i += 5) chunks.push(pending.slice(i, i + 5));
+    for (const chunk of chunks) {
+      await Promise.all(chunk.map((it) => get().generateBatchImage(batchId, it.id)));
+    }
+  },
+
+  selectBatchImageFromHistory: (batchId, itemId, imageUrl) => {
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) =>
+        b.id === batchId
+          ? { ...b, items: b.items.map((it) =>
+              it.id === itemId ? { ...it, image_url: imageUrl, image_status: "done" as FrameStatus } : it
+            ) }
+          : b
+      ),
+    }));
+    _debouncedSave(get);
+  },
+
+  enhanceBatchInstructions: async (batchId, userHint) => {
+    const state = get();
+    const bc = state.batchCreators.find((b) => b.id === batchId);
+    if (!bc) return;
+
+    const outputs = state.agentOutputs;
+    const creativeBrief = outputs.creative_brief as Record<string, unknown> | undefined;
+    const concept = (creativeBrief?.concept_summary as string) || "";
+
+    // Gather connected product and cast descriptions
+    const productDesc = state.keyItems.find((k) => k.type === "product")?.text_prompt || "";
+    const castDesc = state.keyItems.find((k) => k.type === "character" && k.is_permanent_cast)?.text_prompt || "";
+
+    const result = await enhanceBatchInstructions({
+      existing_instructions: bc.user_comment || "",
+      product_description: productDesc,
+      cast_description: castDesc,
+      concept,
+      user_hint: userHint || "",
+    });
+
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) =>
+        b.id === batchId ? { ...b, user_comment: result.enhanced_instructions } : b
+      ),
+    }));
+  },
+
+  generateBatchVideo: async (batchId, itemId) => {
+    const state = get();
+    const bc = state.batchCreators.find((b) => b.id === batchId);
+    const item = bc?.items.find((it) => it.id === itemId);
+    if (!bc || !item || !item.image_url) return;
+
+    set((s) => ({
+      batchCreators: s.batchCreators.map((b) =>
+        b.id === batchId
+          ? { ...b, items: b.items.map((it) => it.id === itemId ? { ...it, video_status: "generating" as FrameStatus, video_error: undefined } : it) }
+          : b
+      ),
+    }));
+
+    try {
+      const { task_id } = await apiGenerateVideo({
+        model: bc.video_model || "kling-3.0/video",
+        prompt: item.prompt,
+        image_urls: [item.image_url],
+        duration: String(bc.video_duration || 5),
+      });
+
+      for (let i = 0; i < 120; i++) {
+        await new Promise((r) => setTimeout(r, 5000));
+        const status = await getVideoTaskStatus(task_id);
+        if (status.state === "success" && status.result_urls?.length) {
+          set((s) => ({
+            batchCreators: s.batchCreators.map((b) =>
+              b.id === batchId
+                ? { ...b, items: b.items.map((it) => it.id === itemId ? { ...it, video_url: status.result_urls![0], video_status: "done" as FrameStatus } : it) }
+                : b
+            ),
+          }));
+          _debouncedSave(get);
+          return;
+        }
+        if (status.state === "fail") throw new Error(status.error_message || "Video generation failed");
+      }
+      throw new Error("Timeout waiting for video");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      set((s) => ({
+        batchCreators: s.batchCreators.map((b) =>
+          b.id === batchId
+            ? { ...b, items: b.items.map((it) => it.id === itemId ? { ...it, video_status: "error" as FrameStatus, video_error: msg } : it) }
+            : b
+        ),
+      }));
+    }
+    _debouncedSave(get);
+  },
+
+  generateBatchAllVideos: async (batchId) => {
+    const bc = get().batchCreators.find((b) => b.id === batchId);
+    if (!bc) return;
+    const ready = bc.items.filter((it) => it.image_url && (it.video_status === "idle" || it.video_status === "error"));
+    const chunks: BatchItem[][] = [];
+    for (let i = 0; i < ready.length; i += 3) chunks.push(ready.slice(i, i + 3));
+    for (const chunk of chunks) {
+      await Promise.all(chunk.map((it) => get().generateBatchVideo(batchId, it.id)));
+    }
+  },
+
+  // ── Permanent Cast ──────────────────────────────────────────
+  addPermanentCast: (name) => {
+    const id = `pcast-${Date.now()}`;
+    const label = name || "New Cast Member";
+    const item: KeyItem = {
+      id,
+      type: "character",
+      label,
+      driver_type: "human",
+      text_prompt: "",
+      is_permanent_cast: true,
+    };
+    set((s) => ({ keyItems: [...s.keyItems, item] }));
+    _debouncedSave(get);
+    return id;
+  },
+
   reset: () => {
+    // Cancel any pending save to prevent stale data from being written
+    if (_saveTimer) { clearTimeout(_saveTimer); _saveTimer = null; }
     const unsub = get().unsubscribe;
     if (unsub) unsub();
     set({
@@ -2273,6 +2714,7 @@ export const useStore = create<StoreState>((set, get) => ({
       keyItems: [],
       scenes: [],
       agentOutputs: {},
+      batchCreators: [],
       error: null,
       unsubscribe: null,
     });

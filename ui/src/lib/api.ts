@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8030";
 
 export async function startWorkflow(
   userInput: string,
@@ -472,6 +472,28 @@ export async function enhanceAssetPrompt(req: EnhanceAssetPromptRequest): Promis
   return res.json();
 }
 
+// ── Batch Instructions Enhancement ────────────────────────────────
+export interface EnhanceBatchInstructionsRequest {
+  existing_instructions: string;
+  product_description: string;
+  cast_description: string;
+  concept: string;
+  user_hint: string;
+}
+
+export async function enhanceBatchInstructions(req: EnhanceBatchInstructionsRequest): Promise<{ enhanced_instructions: string }> {
+  const res = await fetch(`${API_URL}/api/workflow/enhance-batch-instructions`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => res.statusText);
+    throw new Error(`Batch instructions enhancement failed: ${detail}`);
+  }
+  return res.json();
+}
+
 // ── Scene Audio Enhancement ────────────────────────────────
 export interface EnhanceSceneAudioRequest {
   scene_info: Record<string, unknown>;
@@ -605,6 +627,43 @@ export async function getAudioTaskStatus(taskId: string): Promise<AudioTaskStatu
 export async function getMusicTaskStatus(taskId: string): Promise<AudioTaskStatus> {
   const res = await fetch(`${API_URL}/api/audio/music/status/${taskId}`);
   if (!res.ok) throw new Error(`Music status check failed: ${res.statusText}`);
+  return res.json();
+}
+
+// ── Batch Creator ─────────────────────────────────────────
+export interface BatchGeneratePromptsRequest {
+  reference_description: string;
+  reference_image_url: string;
+  user_instructions: string;
+  batch_size: number;
+  concept: string;
+  technical_specs: string;
+  product_description: string;
+  product_image_url: string;
+  generation_mode?: "variations" | "unique_styles" | "model_photoshoot";
+  cast_description?: string;
+  cast_image_url?: string;
+}
+
+export interface BatchPromptItem {
+  style_label: string;
+  prompt: string;
+}
+
+export interface BatchGeneratePromptsResponse {
+  items: BatchPromptItem[];
+}
+
+export async function generateBatchPrompts(req: BatchGeneratePromptsRequest): Promise<BatchGeneratePromptsResponse> {
+  const res = await fetch(`${API_URL}/api/batch/generate-prompts`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => res.statusText);
+    throw new Error(`Batch prompt generation failed: ${detail}`);
+  }
   return res.json();
 }
 

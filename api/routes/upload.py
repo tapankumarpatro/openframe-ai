@@ -102,6 +102,8 @@ async def resolve_image_urls(urls: list[str]) -> list[str]:
 
     This is called by the image generation endpoint to ensure all reference
     images sent to kie.ai are publicly accessible HTTP URLs.
+    If imgbb upload fails, falls back to saving locally and serving via HTTP.
+    NEVER silently drops images — raises on total failure.
     """
     resolved: list[str] = []
     for url in urls:
@@ -120,8 +122,31 @@ async def resolve_image_urls(urls: list[str]) -> list[str]:
                     logger.info(f"[resolve] Uploaded base64 → {public_url}")
                     resolved.append(public_url)
             except Exception as e:
-                logger.warning(f"[resolve] Failed to upload base64 image: {e}")
-        # skip blob: or other unsupported schemes
+                logger.error(f"[resolve] imgbb upload failed: {e} — falling back to local file serving")
+                # Fallback: save locally and serve via the local /api/upload/files/ endpoint
+                try:
+                    ext2, raw2 = _parse_base64(url)
+                    content_hash2 = hashlib.sha256(raw2).hexdigest()[:16]
+                    filename = f"{content_hash2}.{ext2}"
+                    filepath = UPLOAD_DIR / filename
+                    filepath.write_bytes(raw2)
+                    local_url = f"/api/upload/files/{filename}"
+                    _url_cache[content_hash2] = local_url
+                    resolved.append(local_url)
+                    logger.info(f"[resolve] Saved locally → {local_url}")
+                except Exception as e2:
+                    logger.error(f"[resolve] Local fallback also failed: {e2}")
+                    raise RuntimeError(
+                        f"Failed to resolve base64 image: imgbb upload failed ({e}), "
+                        f"local fallback also failed ({e2}). Check IMGBB_API_KEY in settings."
+                    )
+        else:
+            logger.warning(f"[resolve] Skipping unsupported URL scheme: {url[:30]}...")
+    if len(urls) > 0 and len(resolved) == 0:
+        raise RuntimeError(
+            f"All {len(urls)} reference image(s) failed to resolve. "
+            "Check IMGBB_API_KEY in settings or ensure images are valid HTTP URLs."
+        )
     return resolved
 
 

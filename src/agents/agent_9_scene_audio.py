@@ -1,6 +1,6 @@
 from rich.console import Console
 from src.models.schemas import SceneAudioEnhancement
-from src.utils import call_agent_model
+from src.utils import call_agent_model, load_prompt_best_practices
 
 console = Console()
 
@@ -27,6 +27,9 @@ TWO AUDIO MODES:
    - Write a voice prompt describing how the voice should sound
    - CRITICAL: Update ALL video prompts to INCLUDE the spoken dialogue as part of the prompt. The video model needs to "hear" the words to generate matching lip movement and audio.
    - Format: weave the dialogue naturally into the video prompt, e.g., "Model turns to camera and says 'This changed everything for me' in a warm, confident tone while gesturing toward the product"
+
+CRITICAL — NO URLs IN PROMPTS:
+- NEVER include any URL or web address in video prompts or dialogue. Reference images are handled separately via the API.
 
 RULES:
 - dialogue_speaker MUST match one of the active cast member names, or use "narrator" for voiceover
@@ -96,7 +99,12 @@ CAST IN THIS SCENE:
 
 Task: Generate dialogue, voice style prompt, and update the video prompts for {audio_mode} mode. {"For audio-native, the dialogue MUST be woven into the video prompts." if audio_mode == "audio-native" else "For talking-head, keep video prompts visual-only — the audio is separate."}"""
 
-    result = call_agent_model(SYSTEM_PROMPT, user_content, SceneAudioEnhancement)
+    best_practices = load_prompt_best_practices()
+    system = SYSTEM_PROMPT
+    if best_practices:
+        system += f"\n\n═══ PROMPT BEST PRACTICES REFERENCE (follow these guidelines for dialogue & audio) ═══\n{best_practices}\n═══ END BEST PRACTICES ═══"
+
+    result = call_agent_model(system, user_content, SceneAudioEnhancement)
 
     console.print(f"    [green]Audio enhancement for scene #{scene_info.get('scene_number', '?')} ({audio_mode})[/green]")
 

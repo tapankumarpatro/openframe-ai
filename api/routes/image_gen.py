@@ -1,10 +1,13 @@
 """Image generation endpoints — provider-agnostic."""
 
 import time
+import logging
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Optional, List
 from dataclasses import asdict
+
+logger = logging.getLogger("openframe.image_gen")
 
 from api.services.image_gen.registry import ProviderRegistry
 from api.services.image_gen.base import GenerationRequest
@@ -60,9 +63,13 @@ async def generate_image(req: GenerateRequest):
     try:
         # Resolve any base64 data URLs to public HTTP URLs (imgbb)
         resolved_urls = None
-        if req.image_urls:
+        logger.info("[generate_image] model=%s, image_urls count=%s", req.model, len(req.image_urls) if req.image_urls else 0)
+        if req.image_urls and len(req.image_urls) > 0:
             resolved_urls = await resolve_image_urls(req.image_urls)
-            resolved_urls = resolved_urls if resolved_urls else None
+            # Keep as list even if empty — resolve_image_urls raises on total failure
+            if not resolved_urls:
+                resolved_urls = None
+        logger.info("[generate_image] resolved_urls count=%s", len(resolved_urls) if resolved_urls else 0)
 
         provider = ProviderRegistry.get_for_model(req.model)
         task = await provider.create_task(
@@ -80,6 +87,7 @@ async def generate_image(req: GenerateRequest):
         await report_event("image_generation")
         return GenerateResponse(task_id=task.task_id, provider=task.provider)
     except Exception as e:
+        logger.error("Image generation failed: %s", e, exc_info=True)
         ApiLogger.update(log_entry.id, status="error", error_message=str(e),
                          duration_ms=int((time.time() - t0) * 1000))
         raise HTTPException(status_code=500, detail=str(e))

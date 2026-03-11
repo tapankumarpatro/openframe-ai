@@ -1,7 +1,7 @@
 from rich.console import Console
 from src.state import OpenFrameState, get_agent_llm_kwargs
 from src.models.schemas import AudioSpecs
-from src.utils import call_agent_model
+from src.utils import call_agent_model, load_prompt_best_practices
 from src.ad_presets import get_ad_guidance
 
 console = Console()
@@ -77,6 +77,10 @@ Task: Write a global VO script, a technical music generation prompt, and per-sce
 
     ad_guidance = get_ad_guidance(state.get("ad_type"), "sound_designer")
     system = SYSTEM_PROMPT + (f"\n\n**AD TYPE GUIDANCE (you MUST follow this):**\n{ad_guidance}" if ad_guidance else "")
+
+    best_practices = load_prompt_best_practices()
+    if best_practices:
+        system += f"\n\n═══ PROMPT BEST PRACTICES REFERENCE (follow these guidelines for music & voiceover) ═══\n{best_practices}\n═══ END BEST PRACTICES ═══"
 
     result = call_agent_model(system, user_content, AudioSpecs, **get_agent_llm_kwargs(state, "sound_designer"))
 

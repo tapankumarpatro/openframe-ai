@@ -22,7 +22,7 @@ export const TEXTAREA_CLS = cn(INPUT_CLS, "resize-y min-h-[40px]");
 const COLOR_MAP: Record<string, string> = {
   "pure white": "#FFFFFF", "jet black": "#0A0A0A", "porcelain": "#F0E6DA", "alabaster": "#F2F0EB",
   "ivory": "#FFFFF0", "cream": "#FFFDD0", "champagne": "#F7E7CE", "gold": "#FFD700",
-  "silver": "#C0C0C0", "rose gold": "#B76E79", "burgundy": "#800020", "navy": "#000080",
+  "silver": "#C0C0C0", "rose gold": "#B76E79", "burgundy": "#803020", "navy": "#000080",
   "emerald": "#50C878", "sapphire": "#0F52BA", "ruby": "#E0115F", "onyx": "#353839",
   "pearl": "#EAE0C8", "charcoal": "#36454F", "blush": "#DE5D83", "nude": "#E3BC9A",
   "mauve": "#E0B0FF", "taupe": "#483C32", "cognac": "#9F381D", "camel": "#C19A6B",

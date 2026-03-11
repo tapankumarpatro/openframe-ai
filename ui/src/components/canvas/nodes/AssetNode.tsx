@@ -29,6 +29,7 @@ type AssetNodeData = {
   reference_image?: string;
   image_model?: string;
   image_error?: string;
+  is_permanent_cast?: boolean;
   audio_urls?: string[];
   audio_history?: string[];
   audio_status?: string;
@@ -63,6 +64,10 @@ const VIDEO_TYPES: AssetType[] = ["video"];
 const IMAGE_MODELS = [
   { id: "seedream/4.5",      label: "Seedream 4.5",        qualities: ["basic", "high"],       supportsImageInput: true },
   { id: "nano-banana/pro",   label: "Nano Banana Pro",     qualities: ["1K", "2K", "4K"],      supportsImageInput: true },
+  { id: "nano-banana/2",     label: "Nano Banana 2",       qualities: ["1K", "2K", "4K"],      supportsImageInput: true },
+  { id: "qwen/image-edit",   label: "Qwen Edit",           qualities: ["basic"],               supportsImageInput: true },
+  { id: "flux-kontext/pro",  label: "Flux Kontext Pro",    qualities: ["basic"],               supportsImageInput: true },
+  { id: "flux-kontext/max",  label: "Flux Kontext Max",    qualities: ["basic"],               supportsImageInput: true },
   { id: "gpt-image/1.5-i2i", label: "GPT Image 1.5 i2i",  qualities: ["medium", "high"],      supportsImageInput: true },
   { id: "z-image/1.0",       label: "Z Image",             qualities: [],                      supportsImageInput: false },
 ];
@@ -466,6 +471,7 @@ function AssetNodeComponent({ data }: NodeProps) {
   const selectAudioFromHistory = useStore((s) => s.selectAudioFromHistory);
   const updateAssetPrompt = useStore((s) => s.updateAssetPrompt);
   const storeEnhanceAssetPrompt = useStore((s) => s.enhanceAssetPrompt);
+  const removeKeyItem = useStore((s) => s.removeKeyItem);
   const [menuOpen, setMenuOpen] = useState(false);
   const [expanded, setExpanded] = useState(true);
   const [promptOpen, setPromptOpen] = useState(false);
@@ -701,7 +707,10 @@ function AssetNodeComponent({ data }: NodeProps) {
 
       {/* Card content — overflow-hidden keeps content inside rounded border */}
       <div
-        className={cn("bg-card rounded-xl border-2 shadow-lg transition-all overflow-hidden", BORDER_COLORS[d.type])}
+        className={cn(
+          "bg-card rounded-xl border-2 shadow-lg transition-all overflow-hidden",
+          d.is_permanent_cast ? "border-amber-400/70" : BORDER_COLORS[d.type]
+        )}
       >
       {/* Hidden file inputs */}
       <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
@@ -709,11 +718,16 @@ function AssetNodeComponent({ data }: NodeProps) {
 
       {/* Header — click to expand/collapse */}
       <div
-        className="flex items-center gap-2 px-3 py-2 border-b border-border cursor-pointer select-none"
+        className="flex items-center gap-2 px-3 py-2 border-b border-border cursor-pointer select-none group"
         onClick={() => setExpanded(!expanded)}
       >
-        <Icon className={cn("w-4 h-4", ICON_COLORS[d.type])} />
+        <Icon className={cn("w-4 h-4", d.is_permanent_cast ? "text-amber-500" : ICON_COLORS[d.type])} />
         <span className="text-xs font-semibold text-foreground flex-1 truncate">{d.label}</span>
+        {d.is_permanent_cast && (
+          <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-700 font-bold uppercase tracking-wider">
+            Hired
+          </span>
+        )}
         {d.driver_type && (
           <span className="text-[9px] px-1.5 py-0.5 rounded bg-border text-muted font-medium">
             {d.driver_type}
@@ -733,6 +747,13 @@ function AssetNodeComponent({ data }: NodeProps) {
             {aiLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Bot className="w-3.5 h-3.5" />}
           </button>
         )}
+        <button
+          onClick={(e) => { e.stopPropagation(); if (confirm(`Delete "${d.label}"?`)) removeKeyItem(d.assetId); }}
+          className="p-1 rounded-md text-muted hover:bg-red-50 hover:text-red-500 transition-all opacity-0 group-hover:opacity-100"
+          title="Delete card"
+        >
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
         {expanded ? (
           <ChevronUp className="w-3.5 h-3.5 text-muted" />
         ) : (

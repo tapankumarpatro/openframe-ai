@@ -52,7 +52,7 @@
   python -m venv test-venv
   test-venv\Scripts\activate        # or source test-venv/bin/activate
   pip install -r requirements.txt
-  python -m uvicorn api.server:app --port 8000
+  python -m uvicorn api.server:app --port 8030
   # Should start without ImportError
   ```
 - [ ] **Fresh install test (Node):**
@@ -68,7 +68,7 @@
 
 ## 5. Docker
 
-- [x] **`docker-compose.yml`** — backend (port 8000) + frontend (port 3000), env_file, volumes
+- [x] **`docker-compose.yml`** — backend (port 8030) + frontend (port 3030), env_file, volumes
 - [x] **`Dockerfile.backend`** — Python 3.12-slim, pip install, uvicorn CMD
 - [x] **`ui/Dockerfile`** — multi-stage Node build (deps → builder → runner)
 - [x] **`.dockerignore`** — excludes venv, __pycache__, .env, output, ui (for backend image)
@@ -77,7 +77,7 @@
   cp .env.example .env
   # Add at least OPENROUTER_API_KEY to .env
   docker compose up --build
-  # Verify: http://localhost:3000 loads, http://localhost:8000/api/health returns {"status":"ok"}
+  # Verify: http://localhost:3030 loads, http://localhost:8030/api/health returns {"status":"ok"}
   ```
 - [ ] **Frontend Dockerfile `.dockerignore`** — create `ui/.dockerignore` to exclude `.next/`, `node_modules/`
 
@@ -97,12 +97,12 @@
 Run these manually after a fresh clone to verify the full stack works:
 
 ### 7.1 Backend Health
-- [ ] `GET http://localhost:8000/api/health` → `{"status":"ok","service":"openframe-api"}`
-- [ ] `GET http://localhost:8000/api/projects` → `[]` (empty list on fresh install)
-- [ ] `GET http://localhost:8000/api/image/models` → returns list of 4 image models
+- [ ] `GET http://localhost:8030/api/health` → `{"status":"ok","service":"openframe-api"}`
+- [ ] `GET http://localhost:8030/api/projects` → `[]` (empty list on fresh install)
+- [ ] `GET http://localhost:8030/api/image/models` → returns list of 4 image models
 
 ### 7.2 Frontend Load
-- [ ] http://localhost:3000 loads without errors
+- [ ] http://localhost:3030 loads without errors
 - [ ] Projects page renders (empty state with "Create Your First Ad" button)
 - [ ] Settings modal opens (gear icon in header)
 - [ ] API Keys tab shows provider status

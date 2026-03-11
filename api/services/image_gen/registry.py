@@ -5,8 +5,11 @@ from typing import Dict, List
 from .base import ImageProvider, ModelInfo
 from .seedream import SeedreamProvider
 from .nano_banana import NanoBananaProvider
+from .nano_banana_2 import NanoBanana2Provider
 from .gpt_image import GptImageProvider
 from .z_image import ZImageProvider
+from .qwen_image_edit import QwenImageEditProvider
+from .flux_kontext import FluxKontextProvider
 
 
 class ProviderRegistry:
@@ -44,8 +47,11 @@ class ProviderRegistry:
     def initialize(cls) -> None:
         cls.register("seedream", SeedreamProvider())
         cls.register("nano-banana", NanoBananaProvider())
+        cls.register("nano-banana-2", NanoBanana2Provider())
         cls.register("gpt-image", GptImageProvider())
         cls.register("z-image", ZImageProvider())
+        cls.register("qwen-image-edit", QwenImageEditProvider())
+        cls.register("flux-kontext", FluxKontextProvider())
 
 
 # Auto-initialize on import

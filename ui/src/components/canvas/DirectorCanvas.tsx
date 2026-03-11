@@ -19,15 +19,19 @@ import {
 import "@xyflow/react/dist/style.css";
 
 import { useStore } from "@/lib/store";
-import type { FrameStatus, VideoStatus, Scene } from "@/types/schema";
+import { useHiredCastStore } from "@/lib/hiredCastStore";
+import type { FrameStatus, VideoStatus, Scene, HiredCast } from "@/types/schema";
 import SceneNode from "./nodes/SceneNode";
 import AssetNode from "./nodes/AssetNode";
 import NoteNode from "./nodes/NoteNode";
 import SummaryNode from "./nodes/SummaryNode";
 import TalkingCardNode from "./nodes/TalkingCardNode";
+import BatchCreatorNode from "./nodes/BatchCreatorNode";
+import BatchImageOutputNode from "./nodes/BatchImageOutputNode";
+import HiredCastSelector from "../hired-cast/HiredCastSelector";
 import SmartWire from "./edges/SmartWire";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, ZoomIn, ZoomOut, Scissors, Navigation, StickyNote, RatioIcon, Download, FileJson, FileText, Image, Film, Package, LayoutGrid, Plus, User, Trees, ShoppingBag, Mic, Music, Clapperboard, CheckCircle2, Loader2 } from "lucide-react";
+import { Maximize2, ZoomIn, ZoomOut, Scissors, Navigation, StickyNote, RatioIcon, Download, FileJson, FileText, Image, Film, Package, LayoutGrid, Plus, User, UserCheck, Trees, ShoppingBag, Mic, Music, Clapperboard, CheckCircle2, Loader2, Layers } from "lucide-react";
 import { downloadAll, downloadText, downloadImages, downloadAssets, downloadWorkflow } from "@/lib/downloads";
 
 const ASPECT_RATIOS: { label: string; value: string }[] = [
@@ -53,7 +57,7 @@ function saveCanvasState(workflowId: string | null, nodes: Node[], edges: Edge[]
     localStorage.setItem(`${STORAGE_PREFIX}notes-${workflowId}`, JSON.stringify(notes));
   } catch { /* quota */ }
 }
-function saveStoreData(workflowId: string | null, keyItems: unknown[], scenes: unknown[], projectAspectRatio: string, agentOutputs?: Record<string, unknown>) {
+function saveStoreData(workflowId: string | null, keyItems: unknown[], scenes: unknown[], projectAspectRatio: string, agentOutputs?: Record<string, unknown>, batchCreators?: unknown[]) {
   if (!workflowId) return;
   try {
     localStorage.setItem(`${STORAGE_PREFIX}keyItems-${workflowId}`, JSON.stringify(keyItems));
@@ -61,6 +65,9 @@ function saveStoreData(workflowId: string | null, keyItems: unknown[], scenes: u
     localStorage.setItem(`${STORAGE_PREFIX}ar-${workflowId}`, projectAspectRatio);
     if (agentOutputs) {
       localStorage.setItem(`${STORAGE_PREFIX}outputs-${workflowId}`, JSON.stringify(agentOutputs));
+    }
+    if (batchCreators) {
+      localStorage.setItem(`${STORAGE_PREFIX}batch-${workflowId}`, JSON.stringify(batchCreators));
     }
   } catch (err) { console.warn("[OpenFrame] localStorage save failed (quota?):", err); }
 }
@@ -76,18 +83,20 @@ function stripBlobUrls(obj: unknown): unknown {
   return obj;
 }
 
-function loadStoreData(workflowId: string | null): { keyItems?: unknown[]; scenes?: unknown[]; projectAspectRatio?: string; agentOutputs?: Record<string, Record<string, unknown>> } {
+function loadStoreData(workflowId: string | null): { keyItems?: unknown[]; scenes?: unknown[]; projectAspectRatio?: string; agentOutputs?: Record<string, Record<string, unknown>>; batchCreators?: unknown[] } {
   if (!workflowId) return {};
   try {
     const ki = localStorage.getItem(`${STORAGE_PREFIX}keyItems-${workflowId}`);
     const sc = localStorage.getItem(`${STORAGE_PREFIX}scenes-${workflowId}`);
     const ar = localStorage.getItem(`${STORAGE_PREFIX}ar-${workflowId}`);
     const ao = localStorage.getItem(`${STORAGE_PREFIX}outputs-${workflowId}`);
+    const bc = localStorage.getItem(`${STORAGE_PREFIX}batch-${workflowId}`);
     return {
       keyItems: ki ? stripBlobUrls(JSON.parse(ki)) as unknown[] : undefined,
       scenes: sc ? stripBlobUrls(JSON.parse(sc)) as unknown[] : undefined,
       projectAspectRatio: ar || undefined,
       agentOutputs: ao ? stripBlobUrls(JSON.parse(ao)) as Record<string, Record<string, unknown>> : undefined,
+      batchCreators: bc ? stripBlobUrls(JSON.parse(bc)) as unknown[] : undefined,
     };
   } catch { return {}; }
 }
@@ -125,6 +134,8 @@ const nodeTypes = {
   noteNode: NoteNode,
   summaryNode: SummaryNode,
   talkingCardNode: TalkingCardNode,
+  batchCreatorNode: BatchCreatorNode,
+  batchImageOutputNode: BatchImageOutputNode,
 };
 
 const edgeTypes = {
@@ -132,13 +143,15 @@ const edgeTypes = {
 };
 
 /* ---------- Canvas zoom toolbar ---------- */
-function CanvasToolbar({ onAddNote, onOrganize }: { onAddNote: () => void; onOrganize: () => void }) {
+function CanvasToolbar({ onAddNote, onOrganize, onHireCast }: { onAddNote: () => void; onOrganize: () => void; onHireCast: () => void }) {
   const { zoomIn, zoomOut, fitView, getZoom } = useReactFlow();
   const [zoom, setZoom] = useState(100);
   const projectAspectRatio = useStore((s) => s.projectAspectRatio);
   const setProjectAspectRatio = useStore((s) => s.setProjectAspectRatio);
   const addKeyItem = useStore((s) => s.addKeyItem);
   const addScene = useStore((s) => s.addScene);
+  const addBatchCreator = useStore((s) => s.addBatchCreator);
+  const hiredCastCount = useHiredCastStore((s) => s.hiredCast.length);
   const workflowId = useStore((s) => s.workflowId);
   const userInput = useStore((s) => s.userInput);
   const keyItems = useStore((s) => s.keyItems);
@@ -288,6 +301,33 @@ function CanvasToolbar({ onAddNote, onOrganize }: { onAddNote: () => void; onOrg
               <div>
                 <div className="text-[12px] font-medium text-foreground">Scene</div>
                 <div className="text-[10px] text-muted">Image frames + video generation</div>
+              </div>
+            </button>
+            <div className="border-t border-border my-1.5" />
+            <div className="px-3 py-1 text-[9px] font-semibold text-muted uppercase tracking-wider">Special</div>
+            <button
+              onClick={() => { addBatchCreator(); setAddOpen(false); }}
+              className="w-full px-3.5 py-2 text-left hover:bg-card-hover transition-colors flex items-center gap-3"
+            >
+              <Layers className="w-4 h-4 text-amber-500 shrink-0" />
+              <div>
+                <div className="text-[12px] font-medium text-foreground">Batch Creator</div>
+                <div className="text-[10px] text-muted">Generate N image variations + videos</div>
+              </div>
+            </button>
+            <button
+              onClick={() => { onHireCast(); setAddOpen(false); }}
+              className="w-full px-3.5 py-2 text-left hover:bg-card-hover transition-colors flex items-center gap-3"
+            >
+              <UserCheck className="w-4 h-4 text-amber-600 shrink-0" />
+              <div>
+                <div className="text-[12px] font-medium text-foreground flex items-center gap-1.5">
+                  Hire Cast
+                  {hiredCastCount > 0 && (
+                    <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-600 font-bold">{hiredCastCount}</span>
+                  )}
+                </div>
+                <div className="text-[10px] text-muted">Select from saved cast members</div>
               </div>
             </button>
           </div>
@@ -582,12 +622,15 @@ const SCENE_Y_GAP = 660;
 function CanvasInner() {
   const scenes = useStore((s) => s.scenes);
   const keyItems = useStore((s) => s.keyItems);
+  const batchCreators = useStore((s) => s.batchCreators);
   const workflowId = useStore((s) => s.workflowId);
+  const addPermanentCast = useStore((s) => s.addPermanentCast);
   const { fitView, setCenter, getZoom, getViewport } = useReactFlow();
   const prevCount = useRef(0);
   const [handleMenu, setHandleMenu] = useState<HandleMenuState>(null);
   const noteCounter = useRef(0);
   const [highlightNodeId, setHighlightNodeId] = useState<string | null>(null);
+  const [castSelectorOpen, setCastSelectorOpen] = useState(false);
   const projectAspectRatio = useStore((s) => s.projectAspectRatio);
   const rebuildCount = useStore((s) => s.rebuildCount);
 
@@ -628,16 +671,18 @@ function CanvasInner() {
   const scenesRef = useRef(scenes);
   const arRef = useRef(projectAspectRatio);
   const agentOutputsRef = useRef(useStore.getState().agentOutputs);
+  const batchCreatorsRef = useRef(batchCreators);
   const storeSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => { keyItemsRef.current = keyItems; }, [keyItems]);
   useEffect(() => { scenesRef.current = scenes; }, [scenes]);
   useEffect(() => { arRef.current = projectAspectRatio; }, [projectAspectRatio]);
+  useEffect(() => { batchCreatorsRef.current = batchCreators; }, [batchCreators]);
   useEffect(() => { agentOutputsRef.current = useStore.getState().agentOutputs; });
 
   // Instant-save helper — used by debounce + beforeunload
   const saveAll = useCallback(() => {
     saveCanvasState(workflowId, nodes, edges);
-    saveStoreData(workflowId, keyItemsRef.current, scenesRef.current, arRef.current, agentOutputsRef.current);
+    saveStoreData(workflowId, keyItemsRef.current, scenesRef.current, arRef.current, agentOutputsRef.current, batchCreatorsRef.current);
   }, [workflowId, nodes, edges]);
   const saveAllRef = useRef(saveAll);
   useEffect(() => { saveAllRef.current = saveAll; }, [saveAll]);
@@ -658,7 +703,7 @@ function CanvasInner() {
         agentOutputsRef.current = state.agentOutputs;
         if (storeSaveTimer.current) clearTimeout(storeSaveTimer.current);
         storeSaveTimer.current = setTimeout(() => {
-          saveStoreData(workflowId, keyItemsRef.current, scenesRef.current, arRef.current, state.agentOutputs);
+          saveStoreData(workflowId, keyItemsRef.current, scenesRef.current, arRef.current, state.agentOutputs, batchCreatorsRef.current);
         }, 500);
       }
     });
@@ -807,6 +852,14 @@ function CanvasInner() {
         });
       }
 
+      // Restore batch creators
+      if (saved.batchCreators && Array.isArray(saved.batchCreators) && saved.batchCreators.length > 0) {
+        const currentBatch = useStore.getState().batchCreators;
+        if (currentBatch.length === 0) {
+          useStore.setState({ batchCreators: saved.batchCreators as import("@/types/schema").BatchCreator[] });
+        }
+      }
+
       if (saved.projectAspectRatio && saved.projectAspectRatio !== "auto") {
         useStore.getState().setProjectAspectRatio(saved.projectAspectRatio);
       }
@@ -826,10 +879,10 @@ function CanvasInner() {
   useEffect(() => {
     if (storeSaveTimer.current) clearTimeout(storeSaveTimer.current);
     storeSaveTimer.current = setTimeout(() => {
-      saveStoreData(workflowId, keyItems, scenes, projectAspectRatio, useStore.getState().agentOutputs);
+      saveStoreData(workflowId, keyItems, scenes, projectAspectRatio, useStore.getState().agentOutputs, batchCreators);
     }, 500);
     return () => { if (storeSaveTimer.current) clearTimeout(storeSaveTimer.current); };
-  }, [keyItems, scenes, projectAspectRatio, workflowId]);
+  }, [keyItems, scenes, projectAspectRatio, workflowId, batchCreators]);
 
   // FitView after aspect ratio change
   const prevAr = useRef(projectAspectRatio);
@@ -913,6 +966,7 @@ function CanvasInner() {
             music_style_weight: item.music_style_weight,
             music_weirdness: item.music_weirdness,
             music_audio_weight: item.music_audio_weight,
+            is_permanent_cast: item.is_permanent_cast,
           },
           draggable: true,
         };
@@ -1098,7 +1152,47 @@ function CanvasInner() {
         draggable: true,
       };
 
-      return [summaryNode, ...globalNodes, ...castNodes, ...sceneNodes, ...talkingCardNodes, ...savedNotes];
+      // Batch creator nodes
+      const BATCH_X = SCENE_X + SCENE_COLS * SCENE_X_GAP + 200;
+      const batchNodes: Node[] = batchCreators.map((bc, i) => {
+        const id = `batch-${bc.id}`;
+        return {
+          id,
+          type: "batchCreatorNode",
+          position: posMap.get(id) ?? savedPositions[id] ?? { x: BATCH_X, y: i * 500 },
+          data: { batchId: bc.id },
+          draggable: true,
+        };
+      });
+
+      // Batch image output nodes — one per batch item
+      const BATCH_OUT_X_OFFSET = 520; // right of batch creator
+      const BATCH_OUT_COLS = 3;
+      const BATCH_OUT_X_GAP = 290;
+      const BATCH_OUT_Y_GAP = 420;
+      const batchOutputNodes: Node[] = [];
+      batchCreators.forEach((bc, bcIdx) => {
+        const batchNodeId = `batch-${bc.id}`;
+        const batchPos = posMap.get(batchNodeId) ?? savedPositions[batchNodeId] ?? { x: BATCH_X, y: bcIdx * 500 };
+        bc.items.forEach((item, itemIdx) => {
+          const outId = `batch-out-${bc.id}-${item.id}`;
+          const col = itemIdx % BATCH_OUT_COLS;
+          const row = Math.floor(itemIdx / BATCH_OUT_COLS);
+          const defaultPos = {
+            x: batchPos.x + BATCH_OUT_X_OFFSET + col * BATCH_OUT_X_GAP,
+            y: batchPos.y + row * BATCH_OUT_Y_GAP,
+          };
+          batchOutputNodes.push({
+            id: outId,
+            type: "batchImageOutputNode",
+            position: posMap.get(outId) ?? savedPositions[outId] ?? defaultPos,
+            data: { batchId: bc.id, itemId: item.id },
+            draggable: true,
+          });
+        });
+      });
+
+      return [summaryNode, ...globalNodes, ...castNodes, ...sceneNodes, ...talkingCardNodes, ...batchNodes, ...batchOutputNodes, ...savedNotes];
     });
 
     // Restore saved edges on first load (only once)
@@ -1107,11 +1201,12 @@ function CanvasInner() {
       const saved = loadEdges(workflowId);
       // Only trust saved edges if they contain actual asset→scene connections
       // (not just talking-card edges or empty). Otherwise let auto-wiring run fresh.
-      const hasAssetEdges = saved.some(
-        (e) => e.source.startsWith("asset-") && !e.source.startsWith("asset-camera") &&
-               (e.targetHandle === "start-target" || e.targetHandle === "end-target")
+      const hasValidEdges = saved.some(
+        (e) => (e.source.startsWith("asset-") && !e.source.startsWith("asset-camera") &&
+               (e.targetHandle === "start-target" || e.targetHandle === "end-target")) ||
+               e.targetHandle === "batch-target" || e.targetHandle === "batch-product" || e.targetHandle === "batch-cast"
       );
-      if (saved.length > 0 && hasAssetEdges) {
+      if (saved.length > 0 && hasValidEdges) {
         setEdges(saved);
         autoWired.current = true;
       }
@@ -1128,7 +1223,106 @@ function CanvasInner() {
       restoredEdges.current = false;
     }
     prevCount.current = totalCount;
-  }, [scenes, keyItems, setNodes, fitView, workflowId, setEdges, projectAspectRatio]);
+  }, [scenes, keyItems, setNodes, fitView, workflowId, setEdges, projectAspectRatio, batchCreators]);
+
+  // Auto-wire batch creator → output nodes (structural edges, always kept in sync)
+  useEffect(() => {
+    if (batchCreators.length === 0) return;
+    setEdges((prev) => {
+      // Remove stale batch-output edges
+      const nonBatchOut = prev.filter((e) => !e.id.startsWith("batch-out-edge-"));
+      const newEdges: Edge[] = [];
+      const seen = new Set(nonBatchOut.map((e) => `${e.source}→${e.target}`));
+      for (const bc of batchCreators) {
+        const srcId = `batch-${bc.id}`;
+        for (const item of bc.items) {
+          const tgtId = `batch-out-${bc.id}-${item.id}`;
+          const key = `${srcId}→${tgtId}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          newEdges.push({
+            id: `batch-out-edge-${bc.id}-${item.id}`,
+            source: srcId,
+            target: tgtId,
+            targetHandle: "batch-img-in",
+            type: "smartWire",
+            data: { wireType: "batch-output" },
+          });
+        }
+      }
+      if (newEdges.length === 0 && nonBatchOut.length === prev.length) return prev;
+      return [...nonBatchOut, ...newEdges];
+    });
+  }, [batchCreators, setEdges]);
+
+  // Sync batch creator edge connections → stored IDs on the BatchCreator object
+  // Smart auto-classify: scans ALL edges targeting the batch node, resolves source
+  // asset type from keyItems, and auto-classifies as cast/product/ref.
+  // Uses direct setState (NOT updateBatchCreator) to avoid triggering _debouncedSave —
+  // these are transient runtime values re-derived from edges, not persistent data.
+  useEffect(() => {
+    if (batchCreators.length === 0) return;
+    let needsUpdate = false;
+    const updated = batchCreators.map((bc) => {
+      const batchNodeId = `batch-${bc.id}`;
+      const incomingEdges = edges.filter(
+        (e) => e.target === batchNodeId && e.source?.startsWith("asset-")
+      );
+      let castId: string | undefined;
+      let productId: string | undefined;
+      let refId: string | undefined;
+      for (const edge of incomingEdges) {
+        const assetId = edge.source.replace(/^asset-/, "");
+        const item = keyItems.find((k) => k.id === assetId);
+        if (!item) continue;
+        const handle = edge.targetHandle || "";
+        if (handle === "batch-cast" || item.type === "character") {
+          if (!castId) castId = assetId;
+        } else if (handle === "batch-product" || item.type === "product") {
+          if (!productId) productId = assetId;
+        } else {
+          if (!refId) refId = assetId;
+        }
+      }
+      if (bc.connected_cast_id !== castId || bc.connected_product_id !== productId || bc.connected_ref_id !== refId) {
+        needsUpdate = true;
+        return { ...bc, connected_cast_id: castId, connected_product_id: productId, connected_ref_id: refId };
+      }
+      return bc;
+    });
+    if (needsUpdate) {
+      useStore.setState({ batchCreators: updated });
+    }
+  }, [edges, batchCreators, keyItems]);
+
+  // Sync permanent cast keyItems with hiredCastStore — when images are added/removed
+  // in the hired cast page, the canvas cards and API calls use the live data
+  const hiredCastList = useHiredCastStore((s) => s.hiredCast);
+  useEffect(() => {
+    const permanentItems = keyItems.filter((k) => k.is_permanent_cast && k.hired_cast_id);
+    if (permanentItems.length === 0) return;
+    let needsUpdate = false;
+    const updatedItems = keyItems.map((k) => {
+      if (!k.is_permanent_cast || !k.hired_cast_id) return k;
+      const hc = hiredCastList.find((c) => c.id === k.hired_cast_id);
+      if (!hc) return k;
+      const liveFirst = hc.images[0] || undefined;
+      const liveAll = hc.images.length > 0 ? [...hc.images] : undefined;
+      // Only update if images actually changed
+      const currentFirst = k.image_url;
+      const currentAll = k.reference_images;
+      const firstChanged = liveFirst !== currentFirst;
+      const allChanged = JSON.stringify(liveAll) !== JSON.stringify(currentAll);
+      if (firstChanged || allChanged) {
+        needsUpdate = true;
+        return { ...k, image_url: liveFirst, reference_image: liveFirst, reference_images: liveAll };
+      }
+      return k;
+    });
+    if (needsUpdate) {
+      useStore.setState({ keyItems: updatedItems });
+    }
+  }, [hiredCastList, keyItems]);
 
   // Auto-wire: when scenes + keyItems both exist, generate edges from active_cast/active_setting
   // Only runs once per workflow (autoWired flag), and only if no saved edges were restored
@@ -1595,7 +1789,39 @@ function CanvasInner() {
 
   return (
     <>
-      <CanvasToolbar onAddNote={addNote} onOrganize={organizeNodes} />
+      <CanvasToolbar onAddNote={addNote} onOrganize={organizeNodes} onHireCast={() => setCastSelectorOpen(true)} />
+      <HiredCastSelector
+        open={castSelectorOpen}
+        onClose={() => setCastSelectorOpen(false)}
+        onSelect={(cast: HiredCast) => {
+          // Build description from hired cast fields
+          const descParts: string[] = [];
+          if (cast.description) descParts.push(cast.description);
+          if (cast.gender) descParts.push(`Gender: ${cast.gender}`);
+          if (cast.age_range) descParts.push(`Age: ${cast.age_range}`);
+          if (cast.ethnicity) descParts.push(`Ethnicity: ${cast.ethnicity}`);
+          if (cast.physical_details) descParts.push(`Physical: ${cast.physical_details}`);
+          const fullDesc = descParts.join(". ");
+          // Create a pre-populated cast card
+          const id = addPermanentCast(cast.name);
+          // Update with all the hired cast details
+          useStore.setState((s) => ({
+            keyItems: s.keyItems.map((k) =>
+              k.id === id
+                ? {
+                    ...k,
+                    text_prompt: fullDesc,
+                    driver_type: cast.driver_type,
+                    image_url: cast.images[0] || undefined,
+                    reference_image: cast.images[0] || undefined,
+                    reference_images: cast.images.length > 0 ? [...cast.images] : undefined,
+                    hired_cast_id: cast.id,
+                  }
+                : k
+            ),
+          }));
+        }}
+      />
       <HandleContextMenu
         menu={handleMenu}
         onClose={() => setHandleMenu(null)}

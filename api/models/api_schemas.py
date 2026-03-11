@@ -86,6 +86,51 @@ class EnhanceAssetPromptResponse(BaseModel):
     enhanced_prompt: str
 
 
+class EnhanceBatchInstructionsRequest(BaseModel):
+    existing_instructions: str = ""
+    product_description: str = ""
+    cast_description: str = ""
+    concept: str = ""
+    user_hint: str = ""  # optional user hint like "make it more luxurious"
+
+
+class EnhanceBatchInstructionsResponse(BaseModel):
+    enhanced_instructions: str
+
+
+class AnalyzeProductRequest(BaseModel):
+    product_image_url: str
+    product_label: str = ""
+    existing_description: str = ""
+
+
+class AnalyzeProductResponse(BaseModel):
+    product_analysis: str
+
+
+class BatchGeneratePromptsRequest(BaseModel):
+    reference_description: str = ""
+    reference_image_url: str = ""
+    user_instructions: str = ""
+    batch_size: int = 5
+    concept: str = ""
+    technical_specs: str = ""
+    product_description: str = ""
+    product_image_url: str = ""
+    generation_mode: str = "unique_styles"  # "variations", "unique_styles", or "model_photoshoot"
+    cast_description: str = ""
+    cast_image_url: str = ""
+
+
+class BatchPromptItemResponse(BaseModel):
+    style_label: str
+    prompt: str
+
+
+class BatchGeneratePromptsResponse(BaseModel):
+    items: List[BatchPromptItemResponse]
+
+
 class RunSingleAgentRequest(BaseModel):
     agent_name: str  # creative_director, brand_stylist, product_stylist, casting_scout, cinematographer, director, sound_designer
     user_input: str = ""
