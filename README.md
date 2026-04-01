@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/OpenFrame_AI-Open_Source_Ad_Engine-0ea5e9?style=for-the-badge" alt="OpenFrame AI" />
 </p>
 
-<h1 align="center">OpenFrame AI</h1>
+<h1 align="center">GridVid Previously known as OpenFrame AI</h1>
 
 <p align="center">
   <b>The fair-code AI ad creation engine.</b><br/>
